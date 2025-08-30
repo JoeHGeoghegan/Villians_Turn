@@ -23,7 +23,7 @@ class datablock:
         ss.current_turn = None
         audit_headers = ["turn","action_number","action","result","target","target_additional_info","source","source_additional_info","environment","damage","healing","additional_effects"]
         ss.audit = pd.DataFrame(columns=audit_headers)
-        ss.audit_actions,ss.audit_outcome, ss.audit_tags, ss.audit_meta = fx.read_audit("data\default_audit_actions.csv")
+        ss.audit_actions,ss.audit_outcome, ss.audit_tags, ss.audit_meta = fx.read_audit(".\data\default_audit_actions.csv")
         ss.meta_lookup = fx.meta_to_dict(ss.audit_meta)
         ss.turn_number = 0
         ss.action_number = 0
@@ -34,7 +34,7 @@ class datablock:
     def set_audit(self, path):
         ss.audit_actions,ss.audit_outcome, ss.audit_tags, ss.audit_meta = fx.read_audit(path)
 
-@st.cache(allow_output_mutation=True)
+@st.cache_data
 def setup():
     return datablock()
 data = setup()
@@ -223,7 +223,8 @@ with tabSettings:
             if show_ac:
                 hide_ac = st.multiselect("Hide AC for Teams",options=fx.team_list(ss.turn_track))
             show_init = st.checkbox('Show Initiative',value=True)
-            show_team = st.checkbox('Show Teams',value=True)
+            if not (show_health or show_ac) : show_team = st.checkbox('Show Teams',value=True)
+            else: show_team = True
             show_group = st.checkbox('Show Combat Groups',value=True)
             show_attributes = st.checkbox('Show Additional Attributes')
     with st.expander("Audit Settings"):
@@ -370,7 +371,7 @@ with tabModifications:
                 if ss.audit_changes : fx.add_audit_character_note(ss.audit,ss.turn_number,ss.action_number,
                     selected_character,f"Initiative was set to {new_initiative}")
 with tabRuleChange:
-    with open('data\RuleChanges.md', 'r') as f:
+    with open('.\data\RuleChanges.md', 'r') as f:
         rules = f.read()
     st.markdown(rules, unsafe_allow_html=True)
 ########## SideBar ##########
@@ -476,6 +477,10 @@ elif (selected_group_function == "Change Group Name"):
 
 if resize_turn_tracker and show_turn_tracker :
     st.header("Turn Track")
+    if show_health or show_ac:
+        dm_view = st.checkbox("DM View")
+    else:
+        dm_view = False
     display_track = ss.turn_track[ss.turn_track.columns[[
         True, # Always show name
         show_health,
@@ -486,14 +491,15 @@ if resize_turn_tracker and show_turn_tracker :
         show_group,
         show_attributes
     ]]].set_index('name')
-    if show_health :
-        display_track_update = display_track[display_track['team'].isin(hide_health)].copy()
-        display_track_update['health'] = "Hidden"
-        display_track.update(display_track_update)
-    if show_ac :
-        display_track_update = display_track[display_track['team'].isin(hide_ac)].copy()
-        display_track_update['armor_class'] = "Hidden"
-        display_track.update(display_track_update)
+    if not dm_view:
+        if show_health:
+            display_track_update = display_track[display_track['team'].isin(hide_health)].copy()
+            display_track_update['health'] = "Hidden"
+            display_track.update(display_track_update)
+        if show_ac:
+            display_track_update = display_track[display_track['team'].isin(hide_ac)].copy()
+            display_track_update['armor_class'] = "Hidden"
+            display_track.update(display_track_update)
     st.write(display_track)
 elif resize_turn_tracker == 0 :
     resize_turn_tracker = 1
