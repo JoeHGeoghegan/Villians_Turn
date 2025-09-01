@@ -1,0 +1,10 @@
+Action,Movement,Moves,Holds Turn,Holds Turn with Intent to Disrupt,Climbs,Swims,Drops prone,Crawls,Stands up,High jumps,Long jumps,Moves Across Difficult terrain,Moves while Grappling
+Action,Main Action,Attacks,Grapples,Shoves,Casts spell,Dashes,Disengages,Dodges,Escapes,Helps,Uses Object,Uses shield,Hides,Readies/Holds Action,Uses class feature
+Action,Bonus Action,Offhand Attacks,Casts spell,Uses class feature
+Action,Reaction,Opportunity attacks,Uses Readied action,Casts a spell
+Out,Outcome,Succeeds/Hits,Fails/Misses,Hits Critical
+Out,Results,Dealing Damage,Dealing Partial Damage,Healing,Disruption,Self Healing,Hurting Self,Buffing,Debuffing,Inflicting Condition,Something Else Happened,Moves Self,Target Moves
+Tags,Type,Slashing,Bludgeoning,Piercing,Force,Fire,Cold,Lightning,Thunder,Necrotic,Acid,Poison,Radiant,Psychic
+Tags,Condition,Breaks Concentration,Enters Concentration,Disruption,Blinded,Charmed,Deafened,Exhaustion,Frightened,Grappled,Incapacitated,Invisible,Paralyzed,Petrified,Poisoned,Prone,Restrained,Stunned,Unconscious
+Tags,Environment,Normal Conditions,Lightly obscured,Heavily obscured,Bright light,Dim light,Darkness,Blindsight,Darkvision,Truesight,Half cover,Three-quarters cover,Full cover
+Flavor,Results,"[Dealing Damage,target,-,Damage]","[Dealing Partial Damage,target,-,Damage]","[Healing,target,+,Health]","[Disruption,target_group,disrupt,Disrupted]","[Self Healing,self,+,Health]","[Hurting Self,self,-,Damage]","[Buffing,target,attribute,Applied]","[Debuffing,target,attribute,Applied]","[Inflicting Condition,target,condition,Applied]","[Something Else Happened,target,info,What Happened]"

@@ -1,0 +1,10 @@
+﻿Results,Dealing Damage,target,-,Damage
+Results,Dealing Partial Damage,target,-,Damage
+Results,Healing,target,+,Health
+Results,Disruption,target_group,disrupt,Disrupted
+Results,Self Healing,self,+,Health
+Results,Hurting Self,self,-,Damage
+Results,Buffing,target,attribute,Applied
+Results,Debuffing,target,attribute,Applied
+Results,Inflicting Condition,target,condition,Applied
+Results,Something Else Happened,target,info,What Happened
