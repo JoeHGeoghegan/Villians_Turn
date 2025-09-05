@@ -1,101 +1,74 @@
 # Library Imports
 from nicegui import ui, app
 import pandas as pd
+import asyncio
 ### Local Imports
+from memory import init_mem
 from functions.groups import groups_gathered_check
 #from layout import create_layout
+import containers.welcome as welcome
 import containers.overview as overview
+import containers.left_sidebar as left_sidebar
+import containers.right_hiding_sidebar as right_hiding_sidebar
 
 ########## UI To Convert ##########
 """
-                                                                        Memory - data block & cache
-Logo
 Tab/Sidebar/Menu screens
     "Overview"
-        Welcome Message
         Turn Track (ref 60)
         Combat Interface (ref 88)
             Flavor Data Handling (ref 156)
-    "Modifications"
-        Add Person
-        Remove Person/Team
-        Change Initiatives
-    "Settings"
-        Turn Tracker Visuals
-        Audit Settings
-    "Import/Export"
-        Importing
-        Exporting
-    "Rule Changes"
-        Display markdown
-    "Group Functions"
-        "Assign Groups"
-        "Move Group"
-        "Move Person to Other Group"
-        "Merge Groups"
-        "Split Group"
-        "Change Group Name"
-DM View/Player View Toggles
 """
-########## Global Variables ##########
-
 
 ########## UI Elements ##########
-ui.image(".\\assets\Images\Villains_turn_logo.png")
+#basics
+darkMode = True
 
+#pages
 @ui.page('/')
-def main_page():
-    # Layout with rows and columns
-    with ui.row().classes('w-full items-center justify-between'):
-        ui.image("Images/Villains_turn_logo.png")
-        with ui.column():
-            # Use labels for displaying state
-            ui.label(f"Turn #: {ui.storage.page['turn_number']}").classes('text-xl')
-            ui.label(f"Action #: {ui.storage.page['action_number']}").classes('text-xl')
+async def main_page():
+    # Initialize client connection
+    await ui.context.client.connected()
+    await asyncio.sleep(1)
 
-    # Tabs
-    with ui.tabs().classes('w-full') as tabs:
-        ui.tab('Overview')
-        ui.tab('Modifications')
-        ui.tab('Settings')
-        ui.tab('Import/Export')
-        ui.tab('Rule Changes')
+    # Create quick ref memory variable
+    mem = app.storage.tab
+    # Initialize memory variables on first load
+    if 'audit' not in mem:
+        init_mem()
+
+    # UI Settings
+    darkMode = ui.dark_mode(True)
+    ui.colors(
+        primary = '#4f000c',
+        secondary = '#711c00',
+        accent = '#2f4858'
+    )
+
+    # Main Page Layout
+    with ui.header(elevated=True).classes('items-center justify-between'):
+        # Display Logo
+        ui.image('assets/Images/Villains_turn_logo.svg').style('max-width: 300px;')
+        ui.button(on_click=lambda: right_drawer.toggle(), icon='menu').props('flat color=white')
+    with ui.left_drawer(top_corner=True, bottom_corner=True):
+        left_sidebar.create_content(main_page)
+    with ui.right_drawer(fixed=False).props('bordered') as right_drawer:
+        right_hiding_sidebar.create_content(main_page)
+    #with ui.footer():
+
+    main_container() # Refreshable container for main content
     
-    with ui.tab_panels(tabs, value='Overview').classes('w-full'):
-        with ui.tab_panel('Overview'):
-            # This is where the main logic for the overview tab goes
-            if ui.storage.page['turn_track'].empty:
-                ui.label("Welcome! Add Characters in the Modifications tab or Import an existing Villain's Turn csv to get started!")
-            elif not groups_gathered_check(ui.storage.page['turn_track']):
-                ui.label("Groups are not gathered, move groups to desired order or reset initiative")
-            else:
-                # Turn tracking displays
-                with ui.row().classes('w-full justify-between'):
-                    with ui.column():
-                        ui.label(f"{ui.storage.page['current_turn']}'s turn").classes('text-lg')
-                        # Displaying names from the dataframe
-                        current_group = ui.storage.page['turn_track'].loc[ui.storage.page['turn_track']['group']==ui.storage.page['current_turn']]
-                        for name in current_group['name']:
-                            ui.label(name)
-                    
-                    with ui.column():
-                        next_turn = next_turn(ui.storage.page['turn_track'], ui.storage.page['current_turn'])
-                        ui.label(f"{next_turn} is on deck").classes('text-lg')
-                        on_deck_group = ui.storage.page['turn_track'].loc[ui.storage.page['turn_track']['group']==next_turn]
-                        for name in on_deck_group['name']:
-                            ui.label(name)
-
-                    with ui.column():
-                        # Buttons with explicit callbacks
-                        def next_turn_action():
-                            ui.storage.page['current_turn'] = next_turn(ui.storage.page['turn_track'], ui.storage.page['current_turn'])
-                            ui.storage.page['turn_number'] += 1
-                            main_page.update()
-
-                        ui.button("Next Turn", on_click=next_turn_action)
-                        # More buttons for previous turn, jump to turn, etc.
-    #overview.create_content()
+@ui.refreshable
+def main_container() -> None:
+    # memory setup
+    mem = app.storage.tab
+    with ui.column():
+     # If no data, show welcome message relevant options
+        if len(mem['turn_track']) ==  0:
+            welcome.create_content(main_container)
+        else:
+            overview.create_content(main_container)
 
 ############ Run Loop ##########
 if __name__ in {'__main__', '__mp_main__'}:
-    ui.run()
+    ui.run(title="Villain's Turn", reload=True)

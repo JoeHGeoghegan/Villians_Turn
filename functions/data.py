@@ -1,5 +1,7 @@
 # Imports
+import io
 import pandas as pd
+from nicegui import ui, app
 
 #####################################
 ########## Cross functions ##########
@@ -10,13 +12,18 @@ from functions.basics import split_column_list
 ####################################
 ########## Data Functions ##########
 ####################################
-def read_import(path,import_groups=True):
-    party = pd.read_csv(path)
-    if import_groups and ('group' in list(party)):
-        return party
-    else:
+def import_file(refresh_target:ui.refreshable,file,import_groups=True):
+    data = io.BytesIO(file.content.read())
+    party = pd.read_csv(data)
+    if not ( import_groups and ('group' in list(party))):
         party = individual_groups(party)
-        return party
+    add_to_turn_track(party)
+    refresh_target.refresh()
+
+def add_to_turn_track(party:pd.DataFrame):
+    # memory setup
+    mem = app.storage.tab
+    mem['turn_track'] = pd.concat([mem['turn_track'],party])
 
 def read_audit(path):
     audit_tags = {}
@@ -38,7 +45,7 @@ def read_audit(path):
 
 def read_flavor(path):
     output = {}
-    with open(path, 'r') as file:
+    with open(path, 'r', encoding='utf-8-sig') as file:
         for flavor in file:
             flavor_list = flavor.strip().split(',')
             output[flavor_list[0]] = {

@@ -28,7 +28,7 @@ def read_audit(path):
     audit_tags['Audit Header'] = audit_tags['Audit Header'].str[5:]
     audit_out['Audit Header'] = audit_out['Audit Header'].str[4:]
     audit_meta['Audit Header'] = audit_meta['Audit Header'].str[5:]
-    print(audit_actions,audit_out,audit_tags,audit_flavor)
+    print(audit_actions,audit_out,audit_tags,audit_meta)
     
     return process_audit(audit_actions), process_audit(audit_out), process_audit(audit_tags), process_audit(audit_meta)
 
