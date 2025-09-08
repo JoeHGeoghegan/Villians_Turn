@@ -1,16 +1,58 @@
 # Imports
+from nicegui import app
 import pandas as pd
-
-#####################################
-########## Cross functions ##########
-#####################################
+### Local Imports
 from functions.characters import roll, adjust_health, add_additional_info
 from functions.data import col_list_every_action, col_str_every_action
 from functions.groups import  disrupt
+from functions.saveable_methods import lookup_method
 
 ####################################
 ########## Game Functions ##########
 ####################################
+def turn_table_viewer(dm_view=False):
+    #get and organize data
+    mem = app.storage.tab
+    full_df = mem['turn_track'].copy() #full saved for lambda sourcing
+    settings = mem['turn_track_settings'].copy()
+    specials = settings['special'].copy()
+    del settings['special']
+
+    # Get columns to display and the correct labels
+    display_cols = [col for col in settings.keys() if settings[col]['enabled']] #columns to display
+    labels = [settings[col]["label"] for col in settings.keys() if settings[col]['enabled']] #get labels for display columns
+
+    #establish output
+    display_df = full_df.copy()
+
+    #Handle Default Display Overrides
+    for col in settings.keys():
+        if 'override' in settings[col].keys() and settings[col]['enabled']:
+            method, arg_columns = lookup_method(settings[col]['override'])
+            override_col = method(full_df[arg_columns])
+            display_df[col] = override_col
+    # Handle hiding values and special views for non DM view
+    if not dm_view: 
+        for special_handle in specials:
+            if ('team' in special_handle.keys()):
+                if ('hidden_cols' in special_handle.keys()):
+                    for hidden_col in special_handle['hidden_cols']: 
+                        if hidden_col in display_cols: #Corner case check...
+                            display_df.loc[display_df['team']==special_handle['team'],hidden_col] = 'Hidden' # Hide values for specific teams
+                if ('override' in special_handle.keys()):
+                    for override_col_name in special_handle['override'].keys():
+                        if override_col_name in display_cols:
+                            method, arg_columns = lookup_method(special_handle['override'][override_col_name])
+                            override_col_values= method(full_df[arg_columns])
+                            impact_zone = display_df['team'] == special_handle['team']
+                            display_df.loc[impact_zone, override_col_name] = override_col_values[impact_zone]
+
+    # Filter down and adjust columns
+    display_df = display_df[display_cols] #Filter Columns to just enabled ones
+    display_df = display_df.rename(columns=dict(zip(display_cols,labels))) #Rename columns for display and return
+    return display_df
+    
+
 def sort_by_initiatives(groups:pd.DataFrame):
     df = groups.copy()
     df['total_initiative'] = df['initiative']+df['initiative_bonus']
@@ -37,6 +79,12 @@ def initiative_based_group_assignment(groups:pd.DataFrame):
 def auto_initiative(groups:pd.DataFrame):
     df = groups.copy()
     df['initiative'] = df['initiative'].apply(lambda x: roll(20))
+    return df
+
+def auto_initiative_groups(groups:pd.DataFrame):
+    df = auto_initiative(groups)
+    df = initiative_based_group_assignment(df)
+    df = sort_by_initiatives(df)
     return df
 
 def next_turn(groups:pd.DataFrame,current_turn):
@@ -84,7 +132,6 @@ def audit_every_action_df(audit:pd.DataFrame):
     
     if len(concat_list) : return pd.concat(concat_list,ignore_index=True).sort_values(by=["turn","action_number"])
     return pd.DataFrame(columns=['turn','action_number','source','damage','healing','additional_effects'])
-
 
 def submit_action(turn_track,current_turn,results_data,additional_log):
     damage = []

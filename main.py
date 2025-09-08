@@ -5,7 +5,6 @@ import asyncio
 ### Local Imports
 from memory import init_mem
 from functions.groups import groups_gathered_check
-#from layout import create_layout
 import containers.welcome as welcome
 import containers.overview as overview
 import containers.left_sidebar as left_sidebar
@@ -49,24 +48,44 @@ async def main_page():
     with ui.header(elevated=True).classes('items-center justify-between'):
         # Display Logo
         ui.image('assets/Images/Villains_turn_logo.svg').style('max-width: 300px;')
+        ui.markdown('''
+Next Coding Priorities:
+                    
+* Table Viewer Customizer
+                    ''')
         ui.button(on_click=lambda: right_drawer.toggle(), icon='menu').props('flat color=white')
     with ui.left_drawer(top_corner=True, bottom_corner=True):
-        left_sidebar.create_content(main_page)
+        left_sidebar.create_content(main_container)
     with ui.right_drawer(fixed=False).props('bordered') as right_drawer:
-        right_hiding_sidebar.create_content(main_page)
+        right_hiding_sidebar.create_content(main_container)
     #with ui.footer():
 
     main_container() # Refreshable container for main content
     
 @ui.refreshable
 def main_container() -> None:
+    print("~~ Refreshing Main Container ~~")
     # memory setup
     mem = app.storage.tab
     with ui.column():
-     # If no data, show welcome message relevant options
-        if len(mem['turn_track']) ==  0:
+        if len(mem['markdown_view_path']) > 0:
+            print("Showing Markdown View")
+            def back():
+                mem['markdown_view_path'] = ''
+                main_container.refresh()
+            with open(mem['markdown_view_path'], 'r') as md_file:
+                ui.markdown(md_file.read())
+            ui.button('Back', on_click=lambda x: back()) 
+        # If no data, show welcome message relevant options
+        elif len(mem['turn_track']) ==  0:
+            print("No Data - Showing Welcome")
             welcome.create_content(main_container)
+        # If groups not yet gathered, show group gathering screen
+        elif not groups_gathered_check(mem['turn_track']):
+            print("Groups not gathered - Showing Group Gather")
+            welcome.create_group_gather(main_container)
         else:
+            print("Should be Ready to Go! - Showing Overview")
             overview.create_content(main_container)
 
 ############ Run Loop ##########

@@ -1,28 +1,38 @@
 # Library Imports
-from nicegui import ui, app
+from nicegui import app, ui
 import pandas as pd
 
 ### Local Imports
-from functions.data import import_file, add_to_turn_track
+from functions.basics import mem_df_inplace
+from functions.data import import_file, process_party
+from functions.game import auto_initiative_groups, initiative_based_group_assignment, turn_table_viewer
 from functions.groups import individual_groups
 
 def create_content(parent):
-    # memory setup
-    mem = app.storage.tab
-
     ui.label("Welcome! Add Characters or Import an existing Villain's Turn csv to get started!")
-    ui.upload(
-        on_upload=lambda file: import_file(parent,file),
-        label="Click or Drag to Upload CSV File"
-        ).props('accept=.csv')
-    ui.button("Or use test data version 1 (LOTR)", on_click=lambda: example_import(parent,'assets\\party_data\\Party1.csv'))
-    ui.button("Or use test data version 1 (GOT)", on_click=lambda: example_import(parent,'assets\\party_data\\Party2.csv'))
+    
+    with ui.row():
+        col1 = ui.column()
+        col2 = ui.column()
+        with col1:
+            ui.upload(
+                on_upload=lambda file: import_file(parent,file),
+                label="Click or Drag to Upload CSV File"
+                ).props('accept=.csv')
+            ui.button("Download Template CSV", on_click=lambda: ui.download('assets\\party_data\\VilliansTurnTemplate.csv'))
+        with col2:
+            ui.button("Or use test data version Generic", on_click=lambda: example_import(parent,'assets\\party_data\\CombatExample1.csv'))
+            ui.button("Or use test data version LOTR", on_click=lambda: example_import(parent,'assets\\party_data\\Party1.csv'))
+            ui.button("Or use test data version GOT", on_click=lambda: example_import(parent,'assets\\party_data\\Party2.csv'))
+        with open("assets\\data\\csv_details.md", 'r') as md_file:
+            ui.markdown(md_file.read())
     
 def example_import(refresh_target:ui.refreshable,path,import_groups=True):
-    # memory setup
-    mem = app.storage.tab
-    party = pd.read_csv(path)
-    if not ( import_groups and ('group' in list(party))):
-        party = individual_groups(party)
-    add_to_turn_track(party)
-    refresh_target.refresh()
+    process_party(refresh_target,pd.read_csv(path),import_groups)
+
+def create_group_gather(refresh_target:ui.refreshable):
+    ui.table.from_pandas(turn_table_viewer(dm_view=True)) 
+    ui.label("Groups are not gathered, move groups to desired order @TODO or reset initiative")
+    ui.button("Group by Initiative", on_click=lambda: ( mem_df_inplace('turn_track',initiative_based_group_assignment), refresh_target.refresh()))
+    ui.button("Remove Groups", on_click=lambda: ( mem_df_inplace('turn_track',individual_groups), refresh_target.refresh()))
+    ui.button("Roll Initiative", on_click=lambda: ( mem_df_inplace('turn_track',auto_initiative_groups), refresh_target.refresh()))

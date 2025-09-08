@@ -1,5 +1,6 @@
 # Imports
 import pandas as pd
+from nicegui import ui, app
 
 def convert_df(df):
    return df.to_csv(index=False).encode('utf-8')
@@ -25,3 +26,7 @@ def split_column_list(df,column_name,new_axis_names):
     df_split[new_axis_names] = pd.DataFrame(df_split[column_name].to_list(),columns=new_axis_names,index=df_split.index)
     df_split.drop(columns=column_name,inplace=True)
     return df_split
+
+def mem_df_inplace(df_name:str, func=df_match_slice, *args, **kwargs):
+    mem = app.storage.tab
+    mem[df_name] = func(mem[df_name], *args, **kwargs)

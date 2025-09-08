@@ -14,9 +14,16 @@ from functions.basics import split_column_list
 ####################################
 def import_file(refresh_target:ui.refreshable,file,import_groups=True):
     data = io.BytesIO(file.content.read())
-    party = pd.read_csv(data)
+    process_party(refresh_target,pd.read_csv(data),import_groups)
+
+def process_party(refresh_target:ui.refreshable,party,import_groups):
     if not ( import_groups and ('group' in list(party))):
         party = individual_groups(party)
+    party[['temporary_health','ac_mod','initiative','initiative_bonus']
+          ] = party[['temporary_health','ac_mod','initiative','initiative_bonus']].fillna(0)
+    party['health'] = party['health'].fillna(party['max_health'])
+    party['team'] = party['team'].fillna(party['name'])
+    party['group'] = party['group'].fillna(party['name'])
     add_to_turn_track(party)
     refresh_target.refresh()
 
