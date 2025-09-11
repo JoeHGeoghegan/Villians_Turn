@@ -1,29 +1,9 @@
 {
     "special": [
         {
-            "team": "Villians",
-            "hidden_cols": [
-                "max_health",
-                "health",
-                "temporary_health",
-                "armor_class",
-                "ac_mod",
-                "initiative_bonus",
-                "attributes"
-            ]
-        },
-        {
             "team": "Neutrals",
-            "hidden_cols": [
-                "max_health",
-                "temporary_health",
-                "armor_class",
-                "ac_mod",
-                "initiative_bonus",
-                "attributes"
-            ],
             "override": {
-                "health":"health_vague"
+                "health":"health_pct"
             }
         }
     ],

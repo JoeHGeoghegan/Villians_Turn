@@ -3,7 +3,7 @@ from nicegui import app, ui
 import pandas as pd
 
 ### Local Imports
-from functions.basics import mem_df_inplace
+from functions.basics import mem_df_modify
 from functions.data import import_file, process_party
 from functions.game import auto_initiative_groups, initiative_based_group_assignment, turn_table_viewer
 from functions.groups import individual_groups
@@ -24,7 +24,7 @@ def create_content(parent):
             ui.button("Or use test data version Generic", on_click=lambda: example_import(parent,'assets\\party_data\\CombatExample1.csv'))
             ui.button("Or use test data version LOTR", on_click=lambda: example_import(parent,'assets\\party_data\\Party1.csv'))
             ui.button("Or use test data version GOT", on_click=lambda: example_import(parent,'assets\\party_data\\Party2.csv'))
-        with open("assets\\data\\csv_details.md", 'r') as md_file:
+        with open("assets\\texts\\csv_details.md", 'r') as md_file:
             ui.markdown(md_file.read())
     
 def example_import(refresh_target:ui.refreshable,path,import_groups=True):
@@ -33,6 +33,6 @@ def example_import(refresh_target:ui.refreshable,path,import_groups=True):
 def create_group_gather(refresh_target:ui.refreshable):
     ui.table.from_pandas(turn_table_viewer(dm_view=True)) 
     ui.label("Groups are not gathered, move groups to desired order @TODO or reset initiative")
-    ui.button("Group by Initiative", on_click=lambda: ( mem_df_inplace('turn_track',initiative_based_group_assignment), refresh_target.refresh()))
-    ui.button("Remove Groups", on_click=lambda: ( mem_df_inplace('turn_track',individual_groups), refresh_target.refresh()))
-    ui.button("Roll Initiative", on_click=lambda: ( mem_df_inplace('turn_track',auto_initiative_groups), refresh_target.refresh()))
+    ui.button("Group by Initiative", on_click=lambda: ( mem_df_modify('turn_track',initiative_based_group_assignment), refresh_target.refresh()))
+    ui.button("Remove Groups", on_click=lambda: ( mem_df_modify('turn_track',individual_groups), refresh_target.refresh()))
+    ui.button("Roll Initiative", on_click=lambda: ( mem_df_modify('turn_track',auto_initiative_groups), refresh_target.refresh()))

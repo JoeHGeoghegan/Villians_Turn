@@ -1,4 +1,5 @@
 # Imports
+from io import StringIO
 from nicegui import app
 import pandas as pd
 ### Local Imports
@@ -10,11 +11,14 @@ from functions.saveable_methods import lookup_method
 ####################################
 ########## Game Functions ##########
 ####################################
+def turn_track():
+    return pd.read_json(StringIO(app.storage.general['turn_track']))
+
 def turn_table_viewer(dm_view=False):
     #get and organize data
-    mem = app.storage.tab
-    full_df = mem['turn_track'].copy() #full saved for lambda sourcing
-    settings = mem['turn_track_settings'].copy()
+    mem = app.storage.general
+    full_df = turn_track()
+    settings = mem['dm_table_settings'].copy() if dm_view else mem['player_setting_tables'].copy()
     specials = settings['special'].copy()
     del settings['special']
 
@@ -23,7 +27,7 @@ def turn_table_viewer(dm_view=False):
     labels = [settings[col]["label"] for col in settings.keys() if settings[col]['enabled']] #get labels for display columns
 
     #establish output
-    display_df = full_df.copy()
+    display_df = full_df.copy().astype(object)
 
     #Handle Default Display Overrides
     for col in settings.keys():

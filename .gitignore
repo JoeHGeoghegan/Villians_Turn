@@ -1,12 +1,9 @@
-
-# Created by https://www.toptal.com/developers/gitignore/api/python,windows,jupyternotebooks,pythonvanilla
-# Edit at https://www.toptal.com/developers/gitignore?templates=python,windows,jupyternotebooks,pythonvanilla
+ Created by https://www.toptal.com/developers/gitignore/api/python,windows,pythonvanilla,jupyternotebooks,visualstudiocode
+# Edit at https://www.toptal.com/developers/gitignore?templates=python,windows,pythonvanilla,jupyternotebooks,visualstudiocode
 
 ### JupyterNotebooks ###
 # gitignore template for Jupyter Notebooks
 # website: http://jupyter.org/
-
-Examples
 
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
@@ -119,7 +116,15 @@ target/
 #   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
 #poetry.lock
 
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+# pdm
+#   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
+#pdm.lock
+#   pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
+#   in version control.
+#   https://pdm.fming.dev/#use-with-ide
+.pdm.toml
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
 __pypackages__/
 
 # Celery stuff
@@ -130,7 +135,6 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-*.env
 .env
 .venv
 env/
@@ -171,6 +175,16 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+### Python Patch ###
+# Poetry local configuration file - https://python-poetry.org/docs/configuration/#local-configuration
+poetry.toml
+
+# ruff
+.ruff_cache/
+
+# LSP config files
+pyrightconfig.json
+
 ### PythonVanilla ###
 # Byte-compiled / optimized / DLL files
 
@@ -198,6 +212,28 @@ cython_debug/
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow
 
 
+### VisualStudioCode ###
+.vscode/*
+.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+### NiceGui ###
+.nicegui
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
+
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db
@@ -224,4 +260,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/python,windows,jupyternotebooks,pythonvanilla
+# End of https://www.toptal.com/developers/gitignore/api/python,windows,pythonvanilla,jupyternotebooks,visualstudiocode

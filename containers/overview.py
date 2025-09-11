@@ -7,7 +7,7 @@ from functions.game import turn_table_viewer
 
 def create_content(parent):
     # memory setup
-    mem = app.storage.tab
+    mem = app.storage.general
 
     ######## UI ########
 

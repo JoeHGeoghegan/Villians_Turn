@@ -3,6 +3,7 @@ from nicegui import ui, app
 import pandas as pd
 import asyncio
 ### Local Imports
+from functions.basics import mem_df_use
 from memory import init_mem
 from functions.groups import groups_gathered_check
 import containers.welcome as welcome
@@ -31,11 +32,15 @@ async def main_page():
     await asyncio.sleep(1)
 
     # Create quick ref memory variable
-    mem = app.storage.tab
+    mem = app.storage.general
+    user = app.storage.user
     # Initialize memory variables on first load
     if 'audit' not in mem:
         init_mem()
-
+    # Initialize new users
+    if 'role' not in user:
+        user['type'] = "dm"
+        user['id'] = 0
     # UI Settings
     darkMode = ui.dark_mode(True)
     ui.colors(
@@ -48,10 +53,12 @@ async def main_page():
     with ui.header(elevated=True).classes('items-center justify-between'):
         # Display Logo
         ui.image('assets/Images/Villains_turn_logo.svg').style('max-width: 300px;')
+        ui.markdown(f'''
+                    PlayerID: {user["id"]}
+                    ''')
         ui.markdown('''
-Next Coding Priorities:
-                    
-* Table Viewer Customizer
+                    Next Coding Priorities:
+                    Group Functions
                     ''')
         ui.button(on_click=lambda: right_drawer.toggle(), icon='menu').props('flat color=white')
     with ui.left_drawer(top_corner=True, bottom_corner=True):
@@ -66,7 +73,7 @@ Next Coding Priorities:
 def main_container() -> None:
     print("~~ Refreshing Main Container ~~")
     # memory setup
-    mem = app.storage.tab
+    mem = app.storage.general
     with ui.column():
         if len(mem['markdown_view_path']) > 0:
             print("Showing Markdown View")
@@ -77,11 +84,11 @@ def main_container() -> None:
                 ui.markdown(md_file.read())
             ui.button('Back', on_click=lambda x: back()) 
         # If no data, show welcome message relevant options
-        elif len(mem['turn_track']) ==  0:
+        elif mem_df_use('turn_track', len) ==  0:
             print("No Data - Showing Welcome")
             welcome.create_content(main_container)
         # If groups not yet gathered, show group gathering screen
-        elif not groups_gathered_check(mem['turn_track']):
+        elif not mem_df_use('turn_track',groups_gathered_check):
             print("Groups not gathered - Showing Group Gather")
             welcome.create_group_gather(main_container)
         else:
@@ -90,4 +97,4 @@ def main_container() -> None:
 
 ############ Run Loop ##########
 if __name__ in {'__main__', '__mp_main__'}:
-    ui.run(title="Villain's Turn", reload=True)
+    ui.run(title="Villain's Turn", reload=True, storage_secret="TEMPSECRETKEY_THISWILLNOTBERUNONSERVERS")

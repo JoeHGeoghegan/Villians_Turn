@@ -1,0 +1,82 @@
+{
+    "special": [
+        {
+            "team": "Villians",
+            "hidden_cols": [
+                "max_health",
+                "health",
+                "temporary_health",
+                "armor_class",
+                "ac_mod",
+                "initiative_bonus",
+                "attributes"
+            ]
+        },
+        {
+            "team": "Neutrals",
+            "hidden_cols": [
+                "max_health",
+                "temporary_health",
+                "armor_class",
+                "ac_mod",
+                "initiative_bonus",
+                "attributes"
+            ],
+            "override": {
+                "health":"health_vague"
+            }
+        },
+        {
+            "unit_under_players_control": {
+                "health": "health_full_detail",
+                "armor_class" : "armor_full_detail"
+            }
+        }
+    ],
+    "name": {
+        "enabled": true,
+        "label": "Name"
+    },
+    "max_health": {
+        "enabled": false,
+        "label": "Max Health"
+    },
+    "health": {
+        "enabled": true,
+        "label": "Current Health",
+        "override": "health_vague"
+    },
+    "temporary_health": {
+        "enabled": false,
+        "label": "Temporary Health"
+    },
+    "armor_class": {
+        "enabled": true,
+        "label": "Armor Class",
+        "override": "armor_vague"
+    },
+    "ac_mod": {
+        "enabled": false,
+        "label": "Temporary Armor Class"
+    },
+    "initiative": {
+        "enabled": true,
+        "label": "Initiative"
+    },
+    "initiative_bonus": {
+        "enabled": true,
+        "label": "Initiative Bonus"
+    },
+    "team": {
+        "enabled": true,
+        "label": "Team"
+    },
+    "group": {
+        "enabled": true,
+        "label": "Group"
+    },
+    "attributes": {
+        "enabled": false,
+        "label": "Attributes"
+    }
+}

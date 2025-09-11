@@ -1,4 +1,5 @@
 # Imports
+from io import StringIO
 import pandas as pd
 from nicegui import ui, app
 
@@ -27,6 +28,13 @@ def split_column_list(df,column_name,new_axis_names):
     df_split.drop(columns=column_name,inplace=True)
     return df_split
 
-def mem_df_inplace(df_name:str, func=df_match_slice, *args, **kwargs):
-    mem = app.storage.tab
-    mem[df_name] = func(mem[df_name], *args, **kwargs)
+def mem_df_modify(df_name:str, func=df_match_slice, *args, **kwargs):
+    mem = app.storage.general
+    df = pd.read_json(StringIO(mem[df_name]))
+    df = func(df, *args, **kwargs)
+    mem[df_name] = df.to_json()
+
+def mem_df_use(df_name:str, func=convert_df, *args, **kwargs):
+    mem = app.storage.general
+    df = pd.read_json(StringIO(mem[df_name]))
+    return func(df, *args, **kwargs)

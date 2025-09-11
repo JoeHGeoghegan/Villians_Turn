@@ -7,7 +7,7 @@ from nicegui import ui, app
 ########## Cross functions ##########
 #####################################
 from functions.groups import individual_groups
-from functions.basics import split_column_list
+from functions.basics import mem_df_modify, split_column_list
 
 ####################################
 ########## Data Functions ##########
@@ -29,8 +29,9 @@ def process_party(refresh_target:ui.refreshable,party,import_groups):
 
 def add_to_turn_track(party:pd.DataFrame):
     # memory setup
-    mem = app.storage.tab
-    mem['turn_track'] = pd.concat([mem['turn_track'],party])
+    mem = app.storage.general
+    df = pd.read_json(io.StringIO(mem['turn_track']))
+    mem['turn_track'] = pd.concat([df,party]).to_json()
 
 def read_audit(path):
     audit_tags = {}

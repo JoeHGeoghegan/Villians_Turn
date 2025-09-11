@@ -15,6 +15,8 @@ def lookup_method(method_str):
         return armor_full_detail, ['armor_class','ac_mod']
     elif method_str == "armor_total":
         return armor_total, ['armor_class','ac_mod']
+    elif method_str == "armor_vague":
+        return armor_vague, ['armor_class','ac_mod']
     else:
         raise ValueError(f"Unknown method string: {method_str}")
     
@@ -116,3 +118,26 @@ def armor_total(df_slice,showSet=True): #['armor_class','ac_mod']
         lambda row : handle_row(row),
         axis=1
     )
+
+def armor_vague(df_slice): #['armor_class','ac_mod']
+    def vague(row):
+        ac = int(row['armor_class'])
+        ac_mod = row['ac_mod']
+        if type(row['ac_mod']) == str:
+            if ac_mod.startswith('SET'):
+                ac = int("".join(filter(str.isdigit, row['ac_mod'])))
+                ac_mod = 0
+        ac_mod = int(ac_mod)
+        defense = ac+ac_mod
+        if defense <= 5: return "Helpless"
+        if defense <= 8: return "Weak"
+        if defense <= 10: return "Unprepared"
+        if defense <= 12: return "Average"
+        if defense <= 14: return "Focused"
+        if defense <= 16: return "Sturdy"
+        if defense <= 18: return "Steadfast"
+        if defense <= 20: return "Ironclad"
+        if defense <= 22: return "Reinforced"
+        if defense < 25: return "Impregnable"
+        if defense >= 25: return "Invincible"
+    return df_slice.apply(vague, axis=1)

@@ -4,7 +4,7 @@ import pandas as pd
 
 def create_content(main_page):
     # memory setup
-    mem = app.storage.tab
+    mem = app.storage.general
 
     ui.markdown('''
                 ### Always Present Options
