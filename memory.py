@@ -29,7 +29,7 @@ def init_mem():
     mem['results_data'] = []
     mem['audit_combat'] = True
     mem['audit_changes'] = True
-    mem['markdown_view_path'] = ''
     ########## Server Owner Assignment #############
-    user['type'] = "dm"
+    user['markdown_view_path'] = ''
+    user['type'] = "Host"
     user['id'] = 0

@@ -107,6 +107,9 @@ def previous_turn(groups:pd.DataFrame,current_turn):
     else:
         return groups.iloc[current_turns_last_index-1]['group']
 
+def set_current_turn(turn):
+    app.storage.general["current_turn"] = turn
+
 def add_audit(audit_trail:pd.DataFrame,turn,action_number,action,result,target,target_additional_info,source,source_additional_info,environment,damage,healing,additional_effects):
     audit_trail.loc[len(audit_trail.index)] = [
         turn, action_number,

@@ -1,14 +1,14 @@
 name,max_health,health,temporary_health,armor_class,ac_mod,initiative,initiative_bonus,team,group,attributes
 Hostage A,10,3,1,10,0,5,0,Neutrals,Hostages,
 Hostage B,10,9,0,10,0,15,0,Neutrals,Hostages,
-Hostage C (Set HP),10,11,SET:20,10,0,15,0,Neutrals,Hostages,"{'condition':'transformed'}"
-Big Bad,120,30,0,18,,20,3,Villians,,
-Evil Advisor,90,80,10,17,,10,0,Villians,,
-Lacky A,40,5,0,13,,20,1,Villians,,
-Lacky B,40,40,0,13,,15,0,Villians,,
-Lacky C (Set HP),40,20,SET:45,13,,10,1,Villians,,"{'condition':['transformed','prone']}"
-Lacky D,40,10,,13,,5,0,Villians,,
-Fighter,68,51,0,16,1,10,1,Heroes,,"{'weapon': ['dagger','sword']}"
-Rogue,50,19,0,16,-1,23,9,Heroes,,"{'weapon': ['dagger','sword'], 'pet':'Tiger'}"
+Hostage C (Set HP),10,11,SET:20,10,0,15,0,Neutrals,Hostages,{'condition':'transformed'}
+Big Bad,120,30,0,18,,20,3,Villians,Bad Guys,
+Evil Advisor,90,80,10,17,,10,0,Villians,Bad Guys,
+Fighter,68,51,0,16,1,10,1,Heroes,Bad Guys,"{'weapon': ['dagger','sword']}"
+Rogue,50,19,0,16,-1,23,9,Heroes,Bad Guys,"{'weapon': ['dagger','sword'], 'pet':'Tiger'}"
 Mage (Set AC),30,1,0,8,SET:15,9,0,Heroes,,"{'Spell Levels':['Cantrip',1,2,3,4,5]}"
 Cleric,60,10,6,18,1,6,-1,Heroes,,"{'Spell Levels':['Cantrip',1,2,3]}"
+Lacky A,40,5,0,13,,20,1,Villians,Bad Guys,
+Lacky B,40,40,0,13,,15,0,Villians,Bad Guys,
+Lacky C (Set HP),40,20,SET:45,13,,10,1,Villians,Bad Guys,"{'condition':['transformed','prone']}"
+Lacky D,40,10,,13,,5,0,Villians,Bad Guys,

@@ -2,19 +2,18 @@
 from nicegui import ui, app
 import pandas as pd
 # Local Imports
+from functions.interface import set_user_type
 from memory import init_mem
 
-def create_content(main_page:ui.refreshable):
+def create_content(page:ui.refreshable):
     # memory setup
     mem = app.storage.general
     user = app.storage.user
     def set_markdown_view(path):
-        mem['markdown_view_path'] = path
-        main_page.refresh()
-    ui.button('View Rule Changes', on_click=lambda: set_markdown_view('assets\\data\\RuleChanges.md'))
-    ui.button('View CSV Template Details', on_click=lambda: set_markdown_view('assets\\data\\csv_details.md'))
-    if (user["id"] == 0):
-        ui.button('Clear Memory', on_click=lambda: (user.clear(), init_mem()))
+        user['markdown_view_path'] = path
+        page.refresh()
+    ui.button('View Rule Changes', on_click=lambda: set_markdown_view('assets\\texts\\RuleChanges.md'))
+    ui.button('View CSV Template Details', on_click=lambda: set_markdown_view('assets\\texts\\csv_details.md'))
     ui.markdown('''
                 ### Admin/Game Options
                 * "Rule Changes"

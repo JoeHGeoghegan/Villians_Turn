@@ -1,6 +1,5 @@
 # Library Imports
 from nicegui import ui, app
-import pandas as pd
 import asyncio
 ### Local Imports
 from functions.basics import mem_df_use
@@ -11,19 +10,9 @@ import containers.overview as overview
 import containers.left_sidebar as left_sidebar
 import containers.right_hiding_sidebar as right_hiding_sidebar
 
-########## UI To Convert ##########
-"""
-Tab/Sidebar/Menu screens
-    "Overview"
-        Turn Track (ref 60)
-        Combat Interface (ref 88)
-            Flavor Data Handling (ref 156)
-"""
+coding_priorities = "Group Functions"
 
 ########## UI Elements ##########
-#basics
-darkMode = True
-
 #pages
 @ui.page('/')
 async def main_page():
@@ -39,7 +28,7 @@ async def main_page():
         init_mem()
     # Initialize new users
     if 'role' not in user:
-        user['type'] = "dm"
+        user['type'] = "Host"
         user['id'] = 0
     # UI Settings
     darkMode = ui.dark_mode(True)
@@ -54,16 +43,13 @@ async def main_page():
         # Display Logo
         ui.image('assets/Images/Villains_turn_logo.svg').style('max-width: 300px;')
         ui.markdown(f'''
-                    PlayerID: {user["id"]}
-                    ''')
-        ui.markdown('''
                     Next Coding Priorities:
-                    Group Functions
+                    {coding_priorities}
                     ''')
         ui.button(on_click=lambda: right_drawer.toggle(), icon='menu').props('flat color=white')
     with ui.left_drawer(top_corner=True, bottom_corner=True):
         left_sidebar.create_content(main_container)
-    with ui.right_drawer(fixed=False).props('bordered') as right_drawer:
+    with ui.right_drawer(value=False) as right_drawer:
         right_hiding_sidebar.create_content(main_container)
     #with ui.footer():
 
@@ -74,13 +60,18 @@ def main_container() -> None:
     print("~~ Refreshing Main Container ~~")
     # memory setup
     mem = app.storage.general
+    user = app.storage.user
     with ui.column():
-        if len(mem['markdown_view_path']) > 0:
+        if len(user['markdown_view_path']) > 0:
             print("Showing Markdown View")
             def back():
-                mem['markdown_view_path'] = ''
+                user['markdown_view_path'] = ''
                 main_container.refresh()
-            with open(mem['markdown_view_path'], 'r') as md_file:
+            if user['markdown_view_path'][-len("csv_details.md"):] == "csv_details.md" :
+                ui.button("Download Template CSV", on_click=lambda: ui.download('assets\\party_data\\VilliansTurnTemplate.csv'))
+            else:
+                ui.button('Back', on_click=lambda x: back())
+            with open(user['markdown_view_path'], 'r') as md_file:
                 ui.markdown(md_file.read())
             ui.button('Back', on_click=lambda x: back()) 
         # If no data, show welcome message relevant options
@@ -92,9 +83,9 @@ def main_container() -> None:
             print("Groups not gathered - Showing Group Gather")
             welcome.create_group_gather(main_container)
         else:
-            print("Should be Ready to Go! - Showing Overview")
+            print("Showing Overview")
             overview.create_content(main_container)
 
 ############ Run Loop ##########
 if __name__ in {'__main__', '__mp_main__'}:
-    ui.run(title="Villain's Turn", reload=True, storage_secret="TEMPSECRETKEY_THISWILLNOTBERUNONSERVERS")
+    ui.run(title="Villain's Turn", favicon="assets\\Images\\V_favicon.svg", reload=True, storage_secret="TEMPSECRETKEY_THISWILLNOTBERUNONSERVERS")
