@@ -1,6 +1,6 @@
 # Tabletop Tools
 
-Tools to provide custom tabletop support.
+Tools to provide custom tabletop support, provides functionality for facilitating combination attacks using groups. [Group Rules](https://github.com/JoeHGeoghegan/Villians_Turn/blob/main/assets/texts/RuleChanges.md)
 
 ### Features:
 * Wizard DnD 5e sheet template excel sheet
