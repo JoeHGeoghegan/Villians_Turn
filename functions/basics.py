@@ -8,13 +8,13 @@ def convert_df(df):
 
 def mem_df_modify(df_name:str, func, *args, **kwargs):
     mem = app.storage.general
-    df = pd.read_json(StringIO(mem[df_name]))
+    df = pd.DataFrame(mem[df_name])
     df = func(df, *args, **kwargs)
-    mem[df_name] = df.to_json()
+    mem[df_name] = df.to_dict()
 
 def mem_df_use(df_name:str, func, *args, **kwargs):
     mem = app.storage.general
-    df = pd.read_json(StringIO(mem[df_name]))
+    df = pd.DataFrame(mem[df_name])
     return func(df, *args, **kwargs)
 
 def df_match_slice(df:pd.DataFrame,column,match):

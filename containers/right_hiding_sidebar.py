@@ -1,9 +1,6 @@
 # Library Imports
 from nicegui import ui, app
-import pandas as pd
 # Local Imports
-from functions.interface import set_user_type
-from memory import init_mem
 
 def create_content(page:ui.refreshable):
     # memory setup

@@ -43,7 +43,7 @@
     },
     "health": {
         "enabled": true,
-        "label": "Current Health",
+        "label": "HP",
         "override": "health_vague"
     },
     "temporary_health": {
@@ -52,7 +52,7 @@
     },
     "armor_class": {
         "enabled": true,
-        "label": "Armor Class",
+        "label": "AC",
         "override": "armor_vague"
     },
     "ac_mod": {
@@ -61,11 +61,12 @@
     },
     "initiative": {
         "enabled": true,
-        "label": "Initiative"
+        "label": "Initiative",
+        "override": "combo_initiative"
     },
     "initiative_bonus": {
-        "enabled": true,
-        "label": "Initiative Bonus"
+        "enabled": false,
+        "label": "Init. Bonus"
     },
     "team": {
         "enabled": true,

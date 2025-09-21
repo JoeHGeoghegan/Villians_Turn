@@ -17,13 +17,14 @@ def init_mem():
     mem = app.storage.general
     user = app.storage.user
     ########## Global Variables ##########
-    mem['turn_track'] = pd.DataFrame().to_json()
+    mem['turn_track'] = pd.DataFrame().to_dict()
     mem['dm_table_settings'] = dm_table_settings
     mem['player_setting_tables'] = player_setting_tables
     mem['current_turn'] = None
-    mem['audit'] = pd.DataFrame(columns=audit_headers).to_json()
+    mem['audit'] = pd.DataFrame(columns=audit_headers).to_dict()
     mem['audit_actions'],mem['audit_outcome'],mem['audit_tags'] = read_audit('assets\\data\\default_form_data.txt')
     mem['flavors'] = read_flavor('assets\\data\\default_flavor_data.csv')
+    mem['turn_mode'] = "Active"
     mem['turn_number'] = 0
     mem['action_number'] = 0
     mem['results_data'] = []

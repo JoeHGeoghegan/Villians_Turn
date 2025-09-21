@@ -9,59 +9,49 @@
     ],
     "name": {
         "enabled": true,
-        "label": "Name",
-        "order": 0
+        "label": "Name"
     },
     "max_health": {
         "enabled": false,
-        "label": "Max Health",
-        "order": 1
+        "label": "Max Health"
     },
     "health": {
         "enabled": true,
-        "label": "Current Health",
-        "order": 2,
+        "label": "HP",
         "override": "health_full_detail"
     },
     "temporary_health": {
         "enabled": false,
-        "label": "Temporary Health",
-        "order": 3
+        "label": "Temporary Health"
     },
     "armor_class": {
         "enabled": true,
-        "label": "Armor Class",
-        "order": 4,
+        "label": "AC",
         "override": "armor_full_detail"
     },
     "ac_mod": {
         "enabled": false,
-        "label": "Temporary Armor Class",
-        "order": 5
+        "label": "Temporary Armor Class"
     },
     "initiative": {
         "enabled": true,
         "label": "Initiative",
-        "order": 6
+        "override": "combo_initiative"
     },
     "initiative_bonus": {
-        "enabled": true,
-        "label": "Initiative Bonus",
-        "order": 7
+        "enabled": false,
+        "label": "Init. Bonus"
     },
     "team": {
         "enabled": true,
-        "label": "Team",
-        "order": 8
+        "label": "Team"
     },
     "group": {
         "enabled": true,
-        "label": "Group",
-        "order": 9
+        "label": "Group"
     },
     "attributes": {
         "enabled": false,
-        "label": "Attributes",
-        "order": 10
+        "label": "Attributes"
     }
 }

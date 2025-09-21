@@ -1,10 +1,11 @@
 # Imports
 from io import StringIO
 from nicegui import app
+import numpy as np
 import pandas as pd
 ### Local Imports
 from functions.characters import roll, adjust_health, add_additional_info
-from functions.data import col_list_every_action, col_str_every_action
+from functions.data import col_list_every_action, col_str_every_action, cols_and_labels_to_ui_cols, df_to_ui_rows
 from functions.groups import  disrupt
 from functions.saveable_methods import lookup_method
 
@@ -12,19 +13,19 @@ from functions.saveable_methods import lookup_method
 ########## Game Functions ##########
 ####################################
 def turn_track():
-    return pd.read_json(StringIO(app.storage.general['turn_track']))
+    return pd.DataFrame(app.storage.general['turn_track'])
 
-def turn_table_viewer(dm_view=False):
+def turn_table_display(user_type):
     #get and organize data
     mem = app.storage.general
     full_df = turn_track()
-    settings = mem['dm_table_settings'].copy() if dm_view else mem['player_setting_tables'].copy()
+    settings = mem['dm_table_settings'].copy() if user_type=="Host" else mem['player_setting_tables'].copy()
     specials = settings['special'].copy()
     del settings['special']
 
     # Get columns to display and the correct labels
     display_cols = [col for col in settings.keys() if settings[col]['enabled']] #columns to display
-    labels = [settings[col]["label"] for col in settings.keys() if settings[col]['enabled']] #get labels for display columns
+    labels = [settings[col]["label"] for col in display_cols] #get labels for display columns
 
     #establish output
     display_df = full_df.copy().astype(object)
@@ -35,8 +36,8 @@ def turn_table_viewer(dm_view=False):
             method, arg_columns = lookup_method(settings[col]['override'])
             override_col = method(full_df[arg_columns])
             display_df[col] = override_col
-    # Handle hiding values and special views for non DM view
-    if not dm_view: 
+    # Handle hiding values and special views for non Host view
+    if user_type=="Host": 
         for special_handle in specials:
             if ('team' in special_handle.keys()):
                 if ('hidden_cols' in special_handle.keys()):
@@ -53,9 +54,11 @@ def turn_table_viewer(dm_view=False):
 
     # Filter down and adjust columns
     display_df = display_df[display_cols] #Filter Columns to just enabled ones
-    display_df = display_df.rename(columns=dict(zip(display_cols,labels))) #Rename columns for display and return
-    return display_df
-    
+
+    # Format Return
+    rows = df_to_ui_rows(display_df)
+    cols = cols_and_labels_to_ui_cols(display_cols,labels)
+    return cols, rows
 
 def sort_by_initiatives(groups:pd.DataFrame):
     df = groups.copy()
@@ -106,9 +109,20 @@ def previous_turn(groups:pd.DataFrame,current_turn):
         return groups.iloc[-1]['group']
     else:
         return groups.iloc[current_turns_last_index-1]['group']
-
-def set_current_turn(turn):
-    app.storage.general["current_turn"] = turn
+    
+def peak_turn(df:pd.DataFrame,current_turn,direction):
+    #df.reset_index(drop=True,inplace=True)
+    groups = df["group"].unique()
+    current_group_index_search = np.where(groups == current_turn)
+    current_group_index = current_group_index_search[0][0]
+    if current_group_index+direction>= len(groups):
+        return groups[direction-1]
+    return groups[current_group_index+direction]
+    
+def set_turn(df:pd.DataFrame,current_turn,direction,mode):
+    if mode=="Active":
+        app.storage.general['turn_number'] += direction
+    app.storage.general['current_turn'] = peak_turn(df,current_turn,direction)
 
 def add_audit(audit_trail:pd.DataFrame,turn,action_number,action,result,target,target_additional_info,source,source_additional_info,environment,damage,healing,additional_effects):
     audit_trail.loc[len(audit_trail.index)] = [

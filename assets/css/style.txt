@@ -1,0 +1,20 @@
+<style>
+    .highlighted-row {
+        background-color: #2f4858 !important;
+    }
+    .select-text-color-viewable .q-item--active, 
+    .select-text-color-viewable .q-item.q-router-link--active {
+        color: var(--q-accent) !important;
+    }    
+    .col-name { min-width: 150px; text-align: right; }
+    .col-max_health { min-width: 100px; text-align: right; }
+    .col-health { min-width: 100px; text-align: right; }
+    .col-temporary_health { min-width: 100px; text-align: right; }
+    .col-armor_class { min-width: 50px; text-align: right; }
+    .col-ac_mod { min-width: 50px; text-align: right; }
+    .col-initiative { min-width: 100px; text-align: right; }
+    .col-initiative_bonus { min-width: 75px; text-align: right; }
+    .col-team { min-width: 100px; text-align: right; }
+    .col-group { min-width: 100px; text-align: right; }
+    .col-attributes { min-width: 300px; text-align: right; }
+</style>

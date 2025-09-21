@@ -17,6 +17,8 @@ def lookup_method(method_str):
         return armor_total, ['armor_class','ac_mod']
     elif method_str == "armor_vague":
         return armor_vague, ['armor_class','ac_mod']
+    elif method_str == "combo_initiative":
+        return combo_initiative, ['initiative','initiative_bonus']
     else:
         raise ValueError(f"Unknown method string: {method_str}")
     
@@ -53,7 +55,7 @@ def health_hp_and_max(df_slice,showSet=True): #['health','temporary_health','max
                     return f"{row['health']}/*{re.findall(r'\d+', row['temporary_health'])}*"
                 else:
                     return f"{row['health']}/{"".join(filter(str.isdigit, row['temporary_health']))}"
-        return f"{df_slice['hp_curr']+df_slice['hp_temp']}/{df_slice['hp_max']}"
+        return f"{row['health']+row['temporary_health']}/{row['max_health']}"
     return df_slice.apply(
         lambda row : handle_row(row),
         axis=1
@@ -62,9 +64,12 @@ def health_hp_and_max(df_slice,showSet=True): #['health','temporary_health','max
 def health_pct(df_slice): #['health','temporary_health','max_health']
     def handle_row(row):
         if type(row['temporary_health']) == str:
+            health_set = float(re.findall(r'\d+', row['temporary_health'])[0])
             if row['temporary_health'].startswith('SET'):
-                return "???" if (re.findall(r'\d+', row['temporary_health']) == 0) else f"{(df_slice['hp_curr'])/re.findall(r'\d+', row['temporary_health'])*100:.0f}%"
-        return "???" if (df_slice['hp_max'] == 0) else f"{(df_slice['hp_curr']+df_slice['hp_temp'])/df_slice['hp_max']*100:.0f}%"
+                return "???" if (health_set == 0
+                                 ) else f"{(row['health'])/health_set*100:.0f}%"
+        return "???" if (row['max_health'] == 0
+                         ) else f"{float(row['health']+float(row['temporary_health']))/float(row['max_health'])*100:.0f}%"
     return df_slice.apply(
         lambda row : handle_row(row),
         axis=1
@@ -141,3 +146,11 @@ def armor_vague(df_slice): #['armor_class','ac_mod']
         if defense < 25: return "Impregnable"
         if defense >= 25: return "Invincible"
     return df_slice.apply(vague, axis=1)
+
+def combo_initiative(df_slice): #['initiative','initiative_bonus']
+    def handle_row(row):
+        return f"{row['initiative_bonus']}->Rolled({row['initiative']})"
+    return df_slice.apply(
+        lambda row : handle_row(row),
+        axis=1
+    )

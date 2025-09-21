@@ -37,6 +37,30 @@ def individual_groups(groups:pd.DataFrame):
     df['group']=df['name']
     return df
 
+def group_in_place(groups:pd.DataFrame):
+    df = groups.copy()
+    for group_name in df['group'].unique():
+        group_mask = df['group'] == group_name
+
+        #If there is only one subgroup of this grouping, we can skip the below logic
+        if ((df['group'].shift(1) != df['group']) & group_mask).sum() == 1:
+            continue
+
+        # Renames all subgroups to unique values by appending a number to the end
+        index = 0
+        subgroup_number = 1
+        matching_group=False
+        for mask in group_mask:
+            if mask:
+                df.loc[index,'group'] = f"{group_name} {subgroup_number}"
+                matching_group=True
+            else:
+                if matching_group:
+                    subgroup_number+=1
+                    matching_group=False
+            index+=1
+    return df
+
 def move_group(groups:pd.DataFrame,group_to_move,before_or_after,group_to_place):
     df = groups.copy()
     df.reset_index(drop=True,inplace=True)

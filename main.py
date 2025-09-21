@@ -12,7 +12,6 @@ import containers.right_hiding_sidebar as right_hiding_sidebar
 
 coding_priorities = "Group Functions"
 
-########## UI Elements ##########
 #pages
 @ui.page('/')
 async def main_page():
@@ -30,18 +29,20 @@ async def main_page():
     if 'role' not in user:
         user['type'] = "Host"
         user['id'] = 0
-    # UI Settings
+    ########## UI Elements ##########
     darkMode = ui.dark_mode(True)
     ui.colors(
         primary = '#4f000c',
         secondary = '#711c00',
         accent = '#2f4858'
     )
+    with open('assets\\css\\style.txt', 'r', encoding='utf-8') as f:
+        ui.add_head_html(f.read())
 
     # Main Page Layout
     with ui.header(elevated=True).classes('items-center justify-between'):
         # Display Logo
-        ui.image('assets/Images/Villains_turn_logo.svg').style('max-width: 300px;')
+        ui.image('assets/Images/Villains_turn_logo.svg').style('max-width: 200px;')
         ui.markdown(f'''
                     Next Coding Priorities:
                     {coding_priorities}
