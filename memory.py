@@ -15,7 +15,6 @@ audit_headers = ['turn','action_number','action','result','target','target_addit
 
 def init_mem():
     mem = app.storage.general
-    user = app.storage.user
     ########## Global Variables ##########
     mem['turn_track'] = pd.DataFrame().to_dict()
     mem['dm_table_settings'] = dm_table_settings
@@ -24,13 +23,36 @@ def init_mem():
     mem['audit'] = pd.DataFrame(columns=audit_headers).to_dict()
     mem['audit_actions'],mem['audit_outcome'],mem['audit_tags'] = read_audit('assets\\data\\default_form_data.txt')
     mem['flavors'] = read_flavor('assets\\data\\default_flavor_data.csv')
-    mem['turn_mode'] = "Active"
+    mem['turn_mode'] = "setup"
+    mem['table_mode'] = "target"
     mem['turn_number'] = 0
     mem['action_number'] = 0
     mem['results_data'] = []
     mem['audit_combat'] = True
     mem['audit_changes'] = True
-    ########## Server Owner Assignment #############
+    ########## Other Memory Assignment #############
+    init_turn()
+    user = app.storage.user
     user['markdown_view_path'] = ''
     user['type'] = "Host"
     user['id'] = 0
+    mem['clients'] = [f"{user['type']} {user['id']}" ]
+
+def init_user():
+    mem = app.storage.general
+    user = app.storage.user
+    user['markdown_view_path'] = ''
+    user['type'] = "Player"
+
+    temp_list = list(mem['clients'])
+    user['id'] = len(temp_list)
+    
+    temp_list.append(f"{user['type']} {user['id']}")
+    mem['clients'] = temp_list
+
+def init_turn():
+    app.storage.general['turn_data'] = {
+        "actor": [],
+        "actor_override":[],
+        "target":["test value"],
+    }

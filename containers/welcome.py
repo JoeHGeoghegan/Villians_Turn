@@ -35,7 +35,7 @@ def create_group_gather(page:ui.refreshable):
     with ui.row():
         with ui.column():
             ui.label("Groups are not gathered, move groups to desired order or reset initiative").style('font-size: 120%; font-weight: 300')
-            game_list("Host", highlight_rows=True)
+            game_list("Host", highlight_rows=True,page=page)
         with ui.column():
             with ui.button_group():
                 ui.button("Group by Loaded Initiative", on_click=lambda: ( mem_df_modify('turn_track',initiative_based_group_assignment), page.refresh()))

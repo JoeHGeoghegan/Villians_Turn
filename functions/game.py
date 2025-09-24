@@ -8,6 +8,7 @@ from functions.characters import roll, adjust_health, add_additional_info
 from functions.data import col_list_every_action, col_str_every_action, cols_and_labels_to_ui_cols, df_to_ui_rows
 from functions.groups import  disrupt
 from functions.saveable_methods import lookup_method
+from memory import init_turn
 
 ####################################
 ########## Game Functions ##########
@@ -120,7 +121,8 @@ def peak_turn(df:pd.DataFrame,current_turn,direction):
     return groups[current_group_index+direction]
     
 def set_turn(df:pd.DataFrame,current_turn,direction,mode):
-    if mode=="Active":
+    init_turn()
+    if mode=="active":
         app.storage.general['turn_number'] += direction
     app.storage.general['current_turn'] = peak_turn(df,current_turn,direction)
 

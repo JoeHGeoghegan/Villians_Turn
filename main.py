@@ -3,7 +3,7 @@ from nicegui import ui, app
 import asyncio
 ### Local Imports
 from functions.basics import mem_df_use
-from memory import init_mem
+from memory import init_mem, init_user
 from functions.groups import groups_gathered_check
 import containers.welcome as welcome
 import containers.overview as overview
@@ -26,9 +26,8 @@ async def main_page():
     if 'audit' not in mem:
         init_mem()
     # Initialize new users
-    if 'role' not in user:
-        user['type'] = "Host"
-        user['id'] = 0
+    if 'type' not in user:
+        init_user()
     ########## UI Elements ##########
     darkMode = ui.dark_mode(True)
     ui.colors(
@@ -89,4 +88,4 @@ def main_container() -> None:
 
 ############ Run Loop ##########
 if __name__ in {'__main__', '__mp_main__'}:
-    ui.run(title="Villain's Turn", favicon="assets\\Images\\V_favicon.svg", reload=True, storage_secret="TEMPSECRETKEY_THISWILLNOTBERUNONSERVERS")
+    ui.run(host='0.0.0.0',port=55555,title="Villain's Turn", favicon="assets\\Images\\V_favicon.svg", reload=True, storage_secret="TEMPSECRETKEY_THISWILLNOTBERUNONSERVERS")
