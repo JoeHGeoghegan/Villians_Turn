@@ -1,0 +1,4 @@
+character_name,name,attribute,proficient,expertise
+character_name,name,attribute,proficient,Expertise
+character_name,skill,attribute,bool,expertise
+character_name,,,,

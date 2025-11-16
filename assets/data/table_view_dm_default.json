@@ -1,57 +1,65 @@
 {
-    "special": [
-        {
-            "team": "Neutrals",
-            "override": {
-                "health":"health_pct"
-            }
-        }
-    ],
-    "name": {
-        "enabled": true,
-        "label": "Name"
-    },
-    "max_health": {
-        "enabled": false,
-        "label": "Max Health"
-    },
-    "health": {
-        "enabled": true,
-        "label": "HP",
-        "override": "health_full_detail"
-    },
-    "temporary_health": {
-        "enabled": false,
-        "label": "Temporary Health"
-    },
-    "armor_class": {
-        "enabled": true,
-        "label": "AC",
-        "override": "armor_full_detail"
-    },
-    "ac_mod": {
-        "enabled": false,
-        "label": "Temporary Armor Class"
-    },
-    "initiative": {
-        "enabled": true,
-        "label": "Initiative",
-        "override": "combo_initiative"
-    },
-    "initiative_bonus": {
-        "enabled": false,
-        "label": "Init. Bonus"
-    },
-    "team": {
-        "enabled": true,
-        "label": "Team"
-    },
-    "group": {
-        "enabled": true,
-        "label": "Group"
-    },
-    "attributes": {
-        "enabled": false,
-        "label": "Attributes"
+  "special": [
+    {
+      "team": "Neutrals",
+      "override": {
+        "health": "health_pct"
+      }
     }
+  ],
+  "name": {
+    "enabled": true,
+    "label": "Name"
+  },
+  "max_health": {
+    "enabled": false,
+    "label": "Max Health"
+  },
+  "health": {
+    "enabled": true,
+    "label": "HP",
+    "override": "health_full_detail"
+  },
+  "temporary_health_function": {
+    "enabled": false,
+    "label": "Temporary Health Function"
+  },
+  "temporary_health": {
+    "enabled": false,
+    "label": "Temporary Health"
+  },
+  "temporary_health_max": {
+    "enabled": false,
+    "label": "Temporary Max Health"
+  },
+  "armor_class": {
+    "enabled": true,
+    "label": "AC",
+    "override": "armor_full_detail"
+  },
+  "ac_mod_function": {
+    "enabled": false,
+    "label": "Temporary Armor Class Function"
+  },
+  "ac_mod": {
+    "enabled": false,
+    "label": "Temporary Armor Class"
+  },
+  "initiative": {
+    "enabled": true,
+    "label": "Initiative",
+    "override": "combo_initiative"
+  },
+  "initiative_bonus": {
+    "enabled": false,
+    "label": "Init. Bonus"
+  },
+  "team": {
+    "enabled": true,
+    "label": "Team"
+  },
+  "group": {
+    "enabled": true,
+    "label": "Group"
+  }
 }

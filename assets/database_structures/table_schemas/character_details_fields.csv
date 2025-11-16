@@ -1,0 +1,4 @@
+name,team,level,xp,class,background,ancestry,armor_class,initiative,initiative_bonus,group,strength,dexterity,constitution,intelligence,wisdom,charisma
+Name,Team,Level,XP,Class,Background,Ancestry,Armor Class,Initiative,Initiative Bonus,Group,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma
+character_name,string,int,int,string,string,string,int,int,int,string,int,int,int,int,int,int
+New Character,,1,0,None,None,None,10,1,0,,10,10,10,10,10,10

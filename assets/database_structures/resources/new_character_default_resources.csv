@@ -1,0 +1,6 @@
+character_name,name,resource_type,resource_type_trigger_time,resource_use_type,current,max,min,proficiency,attribute
+New Character,Actions,reset_max,turn,game_managed,3,3,0,false,none
+New Character,Movement,reset_max,turn,decrement_by_number,30,30,0,false,none
+New Character,Current HP,reset_max,long_rest,game_managed,8,8,0,false,none
+New Character,Dying,reset_min,any_rest,increment_by_1,0,4,0,false,none
+New Character,Inspiration,reset_min,any_rest,decrement_by_1,0,9999,0,false,none

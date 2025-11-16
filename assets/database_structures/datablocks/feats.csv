@@ -1,0 +1,76 @@
+Feat,Ability Increase,Category,Prerequisite,Repeatable
+Ability Score Improvement,Any,General Feat,Level 4+,Yes
+Actor,Cha,General Feat,"Level 4+, Charisma 13+",-
+Alert,-,Origin Feat,-,-
+Archery,-,Fighting Style Feat,Fighting Style Feature,-
+Athlete,Dex | Str,General Feat,"Level 4+, Strength or Dexterity 13+",-
+Blind Fighting,-,Fighting Style Feat,Fighting Style Feature,-
+Boon of Combat Prowess,Any,Epic Boon Feat,Level 19+,-
+Boon of Dimensional Travel,Any,Epic Boon Feat,Level 19+,-
+Boon of Energy Resistance,Any,Epic Boon Feat,Level 19+,-
+Boon of Fate,Any,Epic Boon Feat,Level 19+,-
+Boon of Fortitude,Any,Epic Boon Feat,Level 19+,-
+Boon of Irresistible Offense,Dex | Str,Epic Boon Feat,Level 19+,-
+Boon of Recovery,Any,Epic Boon Feat,Level 19+,-
+Boon of Skill,Any,Epic Boon Feat,Level 19+,-
+Boon of Speed,Any,Epic Boon Feat,Level 19+,-
+Boon of Spell Recall,Cha | Int | Wis,Epic Boon Feat,"Level 19+, Spellcasting Feature",-
+Boon of the Night Spirit,Any,Epic Boon Feat,Level 19+,-
+Boon of Truesight,Any,Epic Boon Feat,Level 19+,-
+Charger,Dex | Str,General Feat,"Level 4+, Strength or Dexterity 13+",-
+Chef,Con | Wis,General Feat,Level 4+,-
+Crafter,-,Origin Feat,-,-
+Crossbow Expert,Dex,General Feat,"Level 4+, Dexterity 13+",-
+Crusher,Con | Str,General Feat,Level 4+,-
+Defense,-,Fighting Style Feat,Fighting Style Feature,-
+Defensive Duelist,Dex,General Feat,"Level 4+, Dexterity 13+",-
+Dual Wielder,Dex | Str,General Feat,"Level 4+, Strength or Dexterity 13+",-
+Dueling,-,Fighting Style Feat,Fighting Style Feature,-
+Durable,Con,General Feat,Level 4+,-
+Elemental Adept,Cha | Int | Wis,General Feat,"Level 4+, Spellcasting or Pact Magic Feature",Yes
+Fey-Touched,Cha | Int | Wis,General Feat,Level 4+,-
+Grappler,Dex | Str,General Feat,"Level 4+, Strength or Dexterity 13+",-
+Great Weapon Fighting,-,Fighting Style Feat,Fighting Style Feature,-
+Great Weapon Master,Str,General Feat,"Level 4+, Strength 13+",-
+Healer,-,Origin Feat,-,-
+Heavily Armored,Con | Str,General Feat,"Level 4+, Medium Armor Training",-
+Heavy Armor Master,Con | Str,General Feat,"Level 4+, Heavy Armor Training",-
+Inspiring Leader,Cha | Wis,General Feat,"Level 4+, Wisdom or Charisma 13+",-
+Interception,-,Fighting Style Feat,Fighting Style Feature,-
+Keen Mind,Int,General Feat,"Level 4+, Intelligence 13+",-
+Lightly Armored,Dex | Str,General Feat,Level 4+,-
+Lucky,-,Origin Feat,-,-
+Mage Slayer,Dex | Str,General Feat,Level 4+,-
+Magic Initiate,-,Origin Feat,-,Yes
+Martial Weapon Training,Dex | Str,General Feat,Level 4+,-
+Medium Armor Master,Dex | Str,General Feat,"Level 4+, Medium Armor Training",-
+Moderately Armored,Dex | Str,General Feat,"Level 4+, Light Armor Training)",-
+Mounted Combatant,Dex | Str | Wis,General Feat,Level 4+,-
+Musician,-,Origin Feat,-,-
+Observant,Int | Wis,General Feat,"Level 4+, Intelligence or Wisdom 13+",-
+Piercer,Dex | Str,General Feat,Level 4+,-
+Poisoner,Dex | Int,General Feat,Level 4+,-
+Polearm Master,Dex | Str,General Feat,"Level 4+, Strength or Dexterity 13+",-
+Protection,-,Fighting Style Feat,Fighting Style Feature,-
+Resilient,Any,General Feat,Level 4+,-
+Ritual Caster,Cha | Int | Wis,General Feat,"Level 4+, Intelligence, Wisdom, or Charisma 13+",-
+Savage Attacker,-,Origin Feat,-,-
+Sentinel,Dex | Str,General Feat,"Level 4+, Strength or Dexterity 13+",-
+Shadow-Touched,Cha | Int | Wis,General Feat,Level 4+,-
+Sharpshooter,Dex,General Feat,"Level 4+, Dexterity 13+",-
+Shield Master,Str,General Feat,"Level 4+, Shield Training",-
+Skill Expert,Any,General Feat,Level 4+,-
+Skilled,-,Origin Feat,-,Yes
+Skulker,Dex,General Feat,"Level 4+, Dexterity 13+",-
+Slasher,Dex | Str,General Feat,Level 4+,-
+Speedy,Dex,General Feat,"Level 4+, Dexterity or Constitution 13+",-
+Spell Sniper,Cha | Int | Wis,General Feat,"Level 4+, Spellcasting or Pact Magic Feature",-
+Tavern Brawler,-,Origin Feat,-,-
+Telekinetic,Cha | Int | Wis,General Feat,Level 4+,-
+Telepathic,Cha | Int | Wis,General Feat,Level 4+,-
+Thrown Weapon Fighting,-,Fighting Style Feat,Fighting Style Feature,-
+Tough,-,Origin Feat,-,-
+Two-Weapon Fighting,-,Fighting Style Feat,Fighting Style Feature,-
+Unarmed Fighting,-,Fighting Style Feat,Fighting Style Feature,-
+War Caster,Cha | Int | Wis,General Feat,"Level 4+, Spellcasting or Pact Magic Feature",-
+Weapon Master,Dex,General Feat,Level 4+,-

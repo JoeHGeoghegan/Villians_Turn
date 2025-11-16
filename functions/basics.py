@@ -1,40 +1,52 @@
 # Imports
-from io import StringIO
 import pandas as pd
-from nicegui import ui, app
+from nicegui import app
+
+
+def dict_to_df(data):
+    """Convert dict or list of dicts to DataFrame"""
+    if isinstance(data, dict):
+        return pd.DataFrame([data])
+    return pd.DataFrame(data).dropna(how='all')
+
+
+def df_to_dict(df: pd.DataFrame):
+    return df.to_dict(orient='records')
+
 
 def convert_df(df):
-   return df.to_csv(index=False).encode('utf-8')
+    return df.to_csv(index=False).encode('utf-8')
 
-def mem_df_modify(df_name:str, func, *args, **kwargs):
+
+def mem_df_modify(df_name: str, func, *args):
     mem = app.storage.general
-    df = pd.DataFrame(mem[df_name])
-    df = func(df, *args, **kwargs)
-    mem[df_name] = df.to_dict()
+    df = dict_to_df(mem[df_name])
+    df = func(df, *args)
+    mem[df_name] = dict_to_df(df)
 
-def mem_df_use(df_name:str, func, *args, **kwargs):
+
+def mem_df_use(df_name: str, func, *args):
     mem = app.storage.general
-    df = pd.DataFrame(mem[df_name])
-    return func(df, *args, **kwargs)
+    df = dict_to_df(mem[df_name])
+    return func(df, *args)
 
-def df_match_slice(df:pd.DataFrame,column,match):
-    return df[df[column]==match]
 
-def df_set_slice(df:pd.DataFrame,column,match,new_data):
+def df_match_slice(df: pd.DataFrame, column, match):
+    return df[df[column] == match]
+
+
+def df_set_slice(df: pd.DataFrame, column, match, new_data):
     df_slice = df[df[column] == match].copy()
     df_slice[column] = new_data
     df_copy = df.copy()
     df_copy.update(df_slice)
     return df_copy
 
-def split_column_list(df,column_name,new_axis_names):
-    df[new_axis_names] = pd.DataFrame(df[column_name].to_list(),index=df.index)
-    df.drop(columns=column_name,inplace=True)
 
-    
-def split_column_list(df,column_name,new_axis_names):
+def split_column_list(df, column_name, new_axis_names):
     df_split = df.copy()
-    df_split.drop(df[df[column_name].isin(["",[]])].index,inplace=True)
-    df_split[new_axis_names] = pd.DataFrame(df_split[column_name].to_list(),columns=new_axis_names,index=df_split.index)
-    df_split.drop(columns=column_name,inplace=True)
+    df_split.drop(df[df[column_name].isin(["", []])].index, inplace=True)
+    df_split[new_axis_names] = pd.DataFrame(df_split[column_name].to_list(), columns=new_axis_names,
+                                            index=df_split.index)
+    df_split.drop(columns=column_name, inplace=True)
     return df_split

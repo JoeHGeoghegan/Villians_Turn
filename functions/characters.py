@@ -1,40 +1,115 @@
 # Imports
-import pandas as pd
-import random
-import ast
+import copy
+
+from nicegui import app
+
+from functions.basics import df_match_slice
+from functions.basics import dict_to_df, df_to_dict
+from functions.database import resources_file_init
+
 
 #########################################
 ########## Character Functions ##########
 #########################################
-def character_list(turn_track:pd.DataFrame):
-    return(turn_track['name'].unique())
+def character_list():
+    characters = dict_to_df(app.storage.general['character_details'])
+    if characters is None:
+        print("No characters found.")
+        return []
+    else:
+        print(f"Character List: {characters['name'].unique().tolist()}")
+        return characters["name"].unique().tolist()
 
-def team_list(turn_track:pd.DataFrame):
-    return(turn_track['team'].unique())
 
-def roll(sided=20):
-    return random.randint(1,sided)
+def team_list():
+    characters = dict_to_df(app.storage.general['character_details']).dropna(inplace=True)
+    if characters is None:
+        return []
+    else:
+        return characters["team"].unique().tolist()
 
-def attributes_list(groups:pd.DataFrame):
-    df = groups[['name','attributes']].copy()
-    df.dropna(inplace=True)
-    all_attributes = []
-    for index,character in df.iterrows():
-        character_attributes = ast.literal_eval(character['attributes'])
-        for key, values in character_attributes.items() :
-            if type(values) == list :
-                for item in values:
-                    all_attributes.append(f"{character['name']} - {key} - {item}")
-            else :
-                all_attributes.append(f"{character['name']} - {key} - {values}")
-    return all_attributes
 
-def adjust_health(turn_track,is_damage,numbers,target):
-    health_mod = 1
-    if is_damage == "-" : health_mod = -1
-    for number in numbers :
-        value = number[1]
-        turn_track.loc[turn_track['name'].isin(target),'health'] += (health_mod * value)
+def new_character():
+    mem = app.storage.general
+    details = copy.deepcopy(mem["schemas"]["character_details"]["defaults"])
+    character_name = "New Character"
+    skills = resources_file_init(character_name, "assets/database_structures/resources/new_character_skills.csv")
+    resources = resources_file_init(character_name,
+                                    "assets/database_structures/resources/new_character_default_resources.csv")
+    weapons = copy.deepcopy(mem["schemas"]["weapons"]["defaults"])
+    feats = copy.deepcopy(mem["schemas"]["feats"]["defaults"])
+    features = copy.deepcopy(mem["schemas"]["features"]["defaults"])
+    conditions = copy.deepcopy(mem["schemas"]["conditions"]["defaults"])
+    inventory = copy.deepcopy(mem["schemas"]["inventory"]["defaults"])
+    resource_override = copy.deepcopy(mem["schemas"]["resource_override"]["defaults"])
 
-def add_additional_info(result):
-    return f'{result[0]} -> {result[2]} : {result[1]}'
+    # Clear sections
+    for section in [feats, features, conditions, inventory, resource_override]:
+        for key in section:
+            section[key] = None
+
+    # Link resources to character
+    weapons["character_name"] = character_name
+
+    character = {
+        "character_details": details,
+        "weapons": [weapons],
+        "resources": resources,
+        "skills": skills,
+        "feats": [feats],
+        "features": [features],
+        "conditions": [conditions],
+        "inventory": [inventory],
+        "resource_override": [resource_override]
+    }
+
+    # character_save(character)
+
+    return character
+
+
+def character_search(character_name):
+    mem = app.storage.general
+    if character_name == "New Character":
+        return new_character()
+    return {
+        "character_details": df_to_dict(df_match_slice(dict_to_df(mem["character_details"]), "name", character_name))[
+            0],
+        "weapons": df_to_dict(df_match_slice(dict_to_df(mem["weapons"]), "character_name", character_name)),
+        "resources": df_to_dict(df_match_slice(dict_to_df(mem["resources"]), "character_name", character_name)),
+        "skills": df_to_dict(df_match_slice(dict_to_df(mem["skills"]), "character_name", character_name)),
+        "feats": df_to_dict(df_match_slice(dict_to_df(mem["feats"]), "character_name", character_name)),
+        "features": df_to_dict(df_match_slice(dict_to_df(mem["features"]), "character_name", character_name)),
+        "conditions": df_to_dict(df_match_slice(dict_to_df(mem["conditions"]), "character_name", character_name)),
+        "inventory": df_to_dict(df_match_slice(dict_to_df(mem["inventory"]), "character_name", character_name)),
+        "resource_override": df_to_dict(
+            df_match_slice(dict_to_df(mem["resource_override"]), "character_name", character_name))
+    }
+
+
+def new_weapon():
+    pass
+
+
+def new_resource():
+    pass
+
+
+def new_feat():
+    pass
+
+
+def new_feature():
+    pass
+
+
+def new_condition():
+    pass
+
+
+def new_inventory():
+    pass
+
+
+def new_resource_override():
+    pass

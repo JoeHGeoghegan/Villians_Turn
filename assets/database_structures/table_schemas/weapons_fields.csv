@@ -1,0 +1,4 @@
+character_name,name,action_cost,range,damage_dice,attribute,proficiency,traits
+character_name,Name,Action Cost,Range,Damage Dice,Attribute,Proficiency,Traits
+character_name,string,int,int,dice_equation,attribute,bool,string
+character_name,Fine Dagger,1,5,1d4+1,strength,true,None

@@ -1,156 +1,214 @@
-import re
 import pandas as pd
+
+
 def lookup_method(method_str):
     if method_str == "health_full_detail":
-        return health_full_detail, ['health','temporary_health','max_health']
+        return health_full_detail, ['health', 'max_health', 'temporary_health_function', 'temporary_health',
+                                    'temporary_health_max']
     elif method_str == "health_curr_total":
-        return health_curr_total, ['health','temporary_health','max_health']
+        return health_curr_total, ['health', 'max_health', 'temporary_health_function', 'temporary_health',
+                                   'temporary_health_max']
     elif method_str == "health_hp_and_max":
-        return health_hp_and_max, ['health','temporary_health','max_health']
+        return health_hp_and_max, ['health', 'max_health', 'temporary_health_function', 'temporary_health',
+                                   'temporary_health_max']
     elif method_str == "health_pct":
-        return health_pct, ['health','temporary_health','max_health']
+        return health_pct, ['health', 'max_health', 'temporary_health_function', 'temporary_health',
+                            'temporary_health_max']
     elif method_str == "health_vague":
-        return health_vague, ['health','temporary_health','max_health']
+        return health_vague, ['health', 'max_health', 'temporary_health_function', 'temporary_health',
+                              'temporary_health_max']
     elif method_str == "armor_full_detail":
-        return armor_full_detail, ['armor_class','ac_mod']
+        return armor_full_detail, ['armor_class', 'ac_mod', 'ac_mod_function']
     elif method_str == "armor_total":
-        return armor_total, ['armor_class','ac_mod']
+        return armor_total, ['armor_class', 'ac_mod', 'ac_mod_function']
     elif method_str == "armor_vague":
-        return armor_vague, ['armor_class','ac_mod']
+        return armor_vague, ['armor_class', 'ac_mod', 'ac_mod_function']
     elif method_str == "combo_initiative":
-        return combo_initiative, ['initiative','initiative_bonus']
+        return combo_initiative, ['initiative', 'initiative_bonus']
     else:
         raise ValueError(f"Unknown method string: {method_str}")
-    
-def health_full_detail(df_slice:pd.DataFrame,showSet=True): #['health','temporary_health','max_health']
+
+
+def health_full_detail(df_slice: pd.DataFrame,
+                       show_set=True):  # ['health','max_health','temporary_health_function','temporary_health','temporary_health_max']
     def handle_row(row):
-        if type(row['temporary_health']) == str:
-            if row['temporary_health'].startswith('SET'):
-                if showSet:
-                    return f"{row['health']}/{re.findall(r'\d+', row['temporary_health'])}"
-                else:
-                    return f"{row['health']}/{"".join(filter(str.isdigit, row['temporary_health']))}"
-        return f"({row['health']}+{row['temporary_health']})/{row['max_health']}"
+        if row['temporary_health_function'] == 'Set':
+            health = row["temporary_health"] if row["temporary_health"] is not None else row["health"]
+            health = f"*{health}*" if (row["temporary_health"] is not None and show_set) else f"{health}"
+            max_health = row["temporary_health_max"] if row["temporary_health_max"] is not None else row["max_health"]
+            max_health = f"*{max_health}*" if (
+                        row["temporary_health_max"] is not None and show_set) else f"{max_health}"
+            return f"{health}/{max_health}"
+        else:  # Sum or None
+            return f"({row['health']}+{row['temporary_health']})/({row['max_health']}+{row['temporary_health_max']})"
+
     return df_slice.apply(
-        lambda row : handle_row(row),
+        lambda row: handle_row(row),
         axis=1
     )
 
-def health_curr_total(df_slice): #['health','temporary_health','max_health']
+
+def health_curr_total(
+        df_slice):  # ['health','max_health','temporary_health_function','temporary_health','temporary_health_max']
     def handle_row(row):
-        if type(row['temporary_health']) == str:
-            if row['temporary_health'].startswith('SET'):
-                return df_slice['health']
-        return df_slice['health'] + df_slice['temporary_health']
+        if row['temporary_health_function'] == 'Set':
+            return row["temporary_health"] if row["temporary_health"] is not None else row["health"]
+        else:  # Sum but total isn't shown
+            temp_health = row['temporary_health'] if row['temporary_health'] is not None else 0
+            return row['health'] + temp_health
+
     return df_slice.apply(
-        lambda row : handle_row(row),
+        lambda row: handle_row(row),
         axis=1
     )
 
-def health_hp_and_max(df_slice,showSet=True): #['health','temporary_health','max_health']
+
+def health_hp_and_max(df_slice,
+                      show_set=True):  # ['health','max_health','temporary_health_function','temporary_health','temporary_health_max']
     def handle_row(row):
-        if type(row['temporary_health']) == str:
-            if row['temporary_health'].startswith('SET'):
-                if showSet:
-                    return f"{row['health']}/*{re.findall(r'\d+', row['temporary_health'])}*"
-                else:
-                    return f"{row['health']}/{"".join(filter(str.isdigit, row['temporary_health']))}"
-        return f"{row['health']+row['temporary_health']}/{row['max_health']}"
+        if row['temporary_health_function'] == 'Set':
+            health = row["temporary_health"] if row["temporary_health"] is not None else row["health"]
+            health = f"*{health}*" if (row["temporary_health"] is not None and show_set) else f"{health}"
+            max_health = row["temporary_health_max"] if row["temporary_health_max"] is not None else row["max_health"]
+            max_health = f"*{max_health}*" if (
+                        row["temporary_health_max"] is not None and show_set) else f"{max_health}"
+            return f"{health}/{max_health}"
+        else:  # Sum or None
+            temp_health = row['temporary_health'] if row['temporary_health'] is not None else 0
+            temp_max = row['temporary_health_max'] if row['temporary_health_max'] is not None else 0
+            return f"{row['health'] + temp_health}/{row['max_health'] + temp_max}"
+
     return df_slice.apply(
-        lambda row : handle_row(row),
+        lambda row: handle_row(row),
         axis=1
     )
 
-def health_pct(df_slice): #['health','temporary_health','max_health']
+
+def health_pct(
+        df_slice):  # ['health','max_health','temporary_health_function','temporary_health','temporary_health_max']
     def handle_row(row):
-        if type(row['temporary_health']) == str:
-            health_set = float(re.findall(r'\d+', row['temporary_health'])[0])
-            if row['temporary_health'].startswith('SET'):
-                return "???" if (health_set == 0
-                                 ) else f"{(row['health'])/health_set*100:.0f}%"
-        return "???" if (row['max_health'] == 0
-                         ) else f"{float(row['health']+float(row['temporary_health']))/float(row['max_health'])*100:.0f}%"
+        if row['temporary_health_function'] == 'Set':
+            health = row["temporary_health"] if row["temporary_health"] is not None else row["health"]
+            max_health = row["temporary_health_max"] if row["temporary_health_max"] is not None else row["max_health"]
+            return "???" if (max_health <= 0
+                             ) else f"{health / max_health * 100:.0f}%"
+        else:  # Sum or None
+            temp_health = float(row['temporary_health'] if row['temporary_health'] is not None else 0)
+            temp_max = float(row['temporary_health_max'] if row['temporary_health_max'] is not None else 0)
+            return "???" if ((row['max_health'] + temp_max) <= 0
+                             ) else f"{float(row['health'] + temp_health) / float(row['max_health'] + temp_max) * 100:.0f}%"
+
     return df_slice.apply(
-        lambda row : handle_row(row),
+        lambda row: handle_row(row),
         axis=1
     )
 
-def health_vague(df_slice): #['health','temporary_health','max_health']
+
+def health_vague(
+        df_slice):  # ['health','max_health','temporary_health_function','temporary_health','temporary_health_max']
     def vague(row):
-        hp_curr = int(row['health'])
-        hp_temp = row['temporary_health']
-        hp_max = int(row['max_health'])
-        if type(row['temporary_health']) == str:
-            if hp_temp.startswith('SET'):
-                hp_max = int("".join(filter(str.isdigit, row['temporary_health'])))
-                hp_temp = 0
-        if hp_max == 0 : return "???"
-        hp_temp = int(hp_temp)
-        pct = (hp_curr+hp_temp)/hp_max*100
-        if pct >= 100 : return "Healthy"
-        elif pct >= 90 : return "Fine"
-        elif pct >= 75 : return "Lightly Injured"
-        elif pct >= 50 : return "Injured"
-        elif pct >= 25 : return "Heavily Injured"
-        elif pct > 0 : return "Near Death"
-        else : return "Unconscious/Dead"
-    return df_slice.apply(vague, axis=1)
+        if row['temporary_health_function'] == 'Set':
+            health = row["temporary_health"] if row["temporary_health"] is not None else row["health"]
+            max_health = row["temporary_health_max"] if row["temporary_health_max"] is not None else row["max_health"]
+            temp_health = 0
+            temp_max = 0
+        else:  # Sum or None
+            health = row["health"]
+            max_health = row["max_health"]
+            temp_health = float(row['temporary_health'] if row['temporary_health'] is not None else 0)
+            temp_max = float(row['temporary_health_max'] if row['temporary_health_max'] is not None else 0)
 
-def armor_full_detail(df_slice,showSet=False): #['armor_class','ac_mod']
-    def handle_row(row):
-        if type(row['ac_mod']) == str:
-            if row['ac_mod'].startswith('SET'):
-                if showSet:
-                    return f"{re.findall(r'\d+', row['ac_mod'])}"
-                else:
-                    return f"{"".join(filter(str.isdigit, row['ac_mod']))}"
-            else:
-                return f"{row['armor_class']}+{row['ac_mod']}"
+        hp_curr = float(health + temp_health)
+        hp_max = float(max_health + temp_max)
+        if hp_max == 0: return "???"
+        pct = hp_curr / hp_max * 100
+        if pct >= 100:
+            return "Healthy"
+        elif pct >= 90:
+            return "Fine"
+        elif pct >= 75:
+            return "Lightly Injured"
+        elif pct >= 50:
+            return "Injured"
+        elif pct >= 25:
+            return "Heavily Injured"
+        elif pct > 0:
+            return "Near Death"
         else:
-            return f"{row['armor_class']}+{row['ac_mod']}"
-    return df_slice.apply(
-        lambda row : handle_row(row),
-        axis=1
-    )
-def armor_total(df_slice,showSet=True): #['armor_class','ac_mod']
-    def handle_row(row):
-        if type(row['ac_mod']) == str:
-            if row['ac_mod'].startswith('SET'):
-                if showSet:
-                    return f"{re.findall(r'\d+', row['ac_mod'])}"
-        return row['armor_class'] + row['ac_mod']
-    return df_slice.apply(
-        lambda row : handle_row(row),
-        axis=1
-    )
+            return "Lost"
 
-def armor_vague(df_slice): #['armor_class','ac_mod']
-    def vague(row):
-        ac = int(row['armor_class'])
-        ac_mod = row['ac_mod']
-        if type(row['ac_mod']) == str:
-            if ac_mod.startswith('SET'):
-                ac = int("".join(filter(str.isdigit, row['ac_mod'])))
-                ac_mod = 0
-        ac_mod = int(ac_mod)
-        defense = ac+ac_mod
-        if defense <= 5: return "Helpless"
-        if defense <= 8: return "Weak"
-        if defense <= 10: return "Unprepared"
-        if defense <= 12: return "Average"
-        if defense <= 14: return "Focused"
-        if defense <= 16: return "Sturdy"
-        if defense <= 18: return "Steadfast"
-        if defense <= 20: return "Ironclad"
-        if defense <= 22: return "Reinforced"
-        if defense < 25: return "Impregnable"
-        if defense >= 25: return "Invincible"
     return df_slice.apply(vague, axis=1)
 
-def combo_initiative(df_slice): #['initiative','initiative_bonus']
+
+def armor_full_detail(df_slice, show_set=False):  # ['armor_class','ac_mod','ac_mod_function']
+    def handle_row(row):
+        if row['ac_mod_function'] == 'Set':
+            armor_class = row["ac_mod"] if row["ac_mod"] is not None else row["armor_class"]
+            armor_class = f"*{armor_class}*" if (row["ac_mod"] is not None and show_set) else f"{armor_class}"
+            return armor_class
+        else:  # Sum or None
+            return f"{row['armor_class']}+{row['ac_mod']}"
+
+    return df_slice.apply(
+        lambda row: handle_row(row),
+        axis=1
+    )
+
+
+def armor_total(df_slice, show_set=True):  # ['armor_class','ac_mod','ac_mod_function']
+    def handle_row(row):
+        if row['ac_mod_function'] == 'Set':
+            armor_class = row["ac_mod"] if row["ac_mod"] is not None else row["armor_class"]
+            armor_class = f"*{armor_class}*" if (row["ac_mod"] is not None and show_set) else f"{armor_class}"
+        else:  # Sum or None
+            armor_class = row['armor_class'] + row['ac_mod']
+        return armor_class
+
+    return df_slice.apply(
+        lambda row: handle_row(row),
+        axis=1
+    )
+
+
+def armor_vague(df_slice):  # ['armor_class','ac_mod','ac_mod_function']
+    def vague(row):
+        if row['ac_mod_function'] == 'Set':
+            defense = row["ac_mod"] if row["ac_mod"] is not None else row["armor_class"]
+        else:  # Sum or None
+            defense = row["armor_class"] + (float(row['ac_mod'] if row['ac_mod'] is not None else 0))
+        if defense <= 5:
+            return "Helpless"
+        elif defense <= 8:
+            return "Weak"
+        elif defense <= 10:
+            return "Unprepared"
+        elif defense <= 12:
+            return "Average"
+        elif defense <= 14:
+            return "Focused"
+        elif defense <= 16:
+            return "Sturdy"
+        elif defense <= 18:
+            return "Steadfast"
+        elif defense <= 20:
+            return "Ironclad"
+        elif defense <= 22:
+            return "Reinforced"
+        elif defense < 25:
+            return "Impregnable"
+        elif defense >= 25:
+            return "Invincible"
+        else:
+            return "Lost"
+
+    return df_slice.apply(vague, axis=1)
+
+
+def combo_initiative(df_slice):  # ['initiative','initiative_bonus']
     def handle_row(row):
         return f"{row['initiative_bonus']}->Rolled({row['initiative']})"
+
     return df_slice.apply(
-        lambda row : handle_row(row),
+        lambda row: handle_row(row),
         axis=1
     )

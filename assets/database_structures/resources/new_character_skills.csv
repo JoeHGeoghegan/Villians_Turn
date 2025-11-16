@@ -1,0 +1,23 @@
+character_name,name,attribute,proficient,expertise
+New Character,Acrobatics,Dexterity,false,Untrained
+New Character,Animal Handling,Wisdom,false,Untrained
+New Character,Arcana,Intelligence,false,Untrained
+New Character,Athletics,Strength,false,Untrained
+New Character,Crafting,Intelligence,false,Untrained
+New Character,Deception,Charisma,false,Untrained
+New Character,Diplomacy,Charisma,false,Untrained
+New Character,History,Intelligence,false,Untrained
+New Character,Insight,Wisdom,false,Untrained
+New Character,Intimidation,Charisma,false,Untrained
+New Character,Investigation,Intelligence,false,Untrained
+New Character,Medicine,Wisdom,false,Untrained
+New Character,Nature,Intelligence,false,Untrained
+New Character,Occultism,Intelligence,false,Untrained
+New Character,Perception,Wisdom,false,Untrained
+New Character,Performance,Charisma,false,Untrained
+New Character,Persuasion,Charisma,false,Untrained
+New Character,Religion,Intelligence,false,Untrained
+New Character,Society,Intelligence,false,Untrained
+New Character,Stealth,Dexterity,false,Untrained
+New Character,Survival,Wisdom,false,Untrained
+New Character,Thievery,Dexterity,false,Untrained

@@ -1,0 +1,12 @@
+character_name,name,resource_type,resource_type_trigger_time,resource_use_type,current,max,min,proficiency,attribute
+selected_character,Cantrip,reset_min,any_rest,increment_by_1,0,none,0,true,intelligence
+selected_character,Level 1 Spell,reset_max,long_rest,decrement_by_1,1,1,0,true,intelligence
+selected_character,Level 2 Spell,reset_min,long_rest,decrement_by_1,0,0,0,true,intelligence
+selected_character,Level 3 Spell,reset_min,long_rest,decrement_by_1,0,0,0,true,intelligence
+selected_character,Level 4 Spell,reset_min,long_rest,decrement_by_1,0,0,0,true,intelligence
+selected_character,Level 5 Spell,reset_min,long_rest,decrement_by_1,0,0,0,true,intelligence
+selected_character,Level 6 Spell,reset_min,long_rest,decrement_by_1,0,0,0,true,intelligence
+selected_character,Level 7 Spell,reset_min,long_rest,decrement_by_1,0,0,0,true,intelligence
+selected_character,Level 8 Spell,reset_min,long_rest,decrement_by_1,0,0,0,true,intelligence
+selected_character,Level 9 Spell,reset_min,long_rest,decrement_by_1,0,0,0,true,intelligence
+selected_character,Level 10 Spell,reset_min,long_rest,decrement_by_1,0,0,0,true,intelligence
