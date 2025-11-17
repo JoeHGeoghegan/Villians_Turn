@@ -148,8 +148,6 @@ def create_content(page: ui.refreshable):
 
 
 def character_save(character):
-    print(f"Saving data for {character["character_details"]["name"]}")
-    print(f"Current Characters: {character_list()}")
     mem = app.storage.general
 
     # renamed character catch
@@ -181,7 +179,6 @@ def character_save(character):
         else:
             updated_data = pd.concat([unmodified_section_memory_df, new_data_character_section_df], ignore_index=True)
             mem[section] = df_to_dict(updated_data)
-    print(f"Existing Characters: {character_list()}")
 
 
 def rename_character(new_name):
@@ -204,12 +201,6 @@ def select_character(character_name):
     selected_character = character_search(character_name)
     containing_page.refresh()
 
-
-def set_character_data(section, index, key, new_value):
-    global selected_character
-    selected_character[section][index][key] = new_value
-
-
 def add_to_section(section, new_item):
     global selected_character
     if type(new_item) == dict:
@@ -217,11 +208,17 @@ def add_to_section(section, new_item):
     elif type(new_item) == list:
         selected_character[section].extend(new_item)
 
+def set_character_data(section, index, key, new_value):
+    if type(new_value) == float:
+        new_value = int(new_value)
+    global selected_character
+    selected_character[section][index][key] = new_value
 
 def set_character_detail(key, new_value):
+    if type(new_value) == float:
+        new_value = int(new_value)
     global selected_character
     selected_character["character_details"][key] = new_value
-
 
 def entry_fields(database_section, header_list, index=0):
     global selected_character
@@ -243,7 +240,7 @@ def entry_fields(database_section, header_list, index=0):
             pass
         elif entry_type == "int":
             if head_table:
-                ui.number(label=label, value=data_value, on_change=lambda e, h=header:
+                ui.number(label=label, value=data_value,precision=5, step=1, format='%.0f', on_change=lambda e, h=header:
                 set_character_detail(h, e.value))
             else:
                 ui.number(label=label, value=data_value, on_change=lambda e, h=header:

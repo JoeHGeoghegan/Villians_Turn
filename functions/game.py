@@ -28,8 +28,8 @@ def turn_track():
 
     # From resources, we just need "health" resource types,
     #   which has "current" and "max" which translate to "health" and "max_health"
-    health_df = dict_to_df(mem['resources'])
-    health_df = health_df[health_df['resource_type'] == "health"][["character_name", "current", "max"]]
+    resources_df = dict_to_df(mem['resources'])
+    health_df = resources_df[resources_df['name'] == "Current HP"][["character_name", "current", "max"]]
     health_df.rename(columns={"character_name": "name", "current": "health", "max": "max_health"}, inplace=True)
     turn_track_df = turn_track_df.merge(health_df, on="name", how="left")
 
@@ -37,7 +37,7 @@ def turn_track():
     #   and "override_max" to figure out overrides
     override_df = dict_to_df(mem['resource_override'])
     # Health Overrides
-    health_overrides = override_df[override_df['resource_name'] == "health"]
+    health_overrides = override_df[override_df['resource_name'] == "Current HP"]
     health_overrides = health_overrides[["character_name", "override_type", "override_current", "override_max"]]
     health_overrides.rename(columns={
         "character_name": "name",
@@ -55,6 +55,12 @@ def turn_track():
         "override_current": "ac_mod"
     }, inplace=True)
     turn_track_df = turn_track_df.merge(armor_overrides, on="name", how="left")
+
+    # Health and Armor Fill ins if no override
+    turn_track_df[["temporary_health_function","ac_mod_function"]] = turn_track_df[
+        ["temporary_health_function","ac_mod_function"]].astype(str).fillna("Sum")
+    turn_track_df[["temporary_health", "temporary_health_max","ac_mod"]] = turn_track_df[
+        ["temporary_health", "temporary_health_max","ac_mod"]].astype(float).fillna(0).astype(int)
 
     return turn_track_df
 

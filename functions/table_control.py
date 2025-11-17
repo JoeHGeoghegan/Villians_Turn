@@ -27,8 +27,8 @@ def game_list(user_type, highlight_rows, page: ui.refreshable):
                         ui.item_label(list_row["name"])  # .classes('font-ui-monospace')
                         ui.item_label(list_row["team"]).props('caption')
                 elif list_col['name'] != "team":
-                    with ui.item_section().props('no-wrap, side').style(f'width: {col_widths[col['name']]}px'):
-                        ui.item_label(list_row[col["name"]])  # .classes('font-ui-monospace')
+                    with ui.item_section().props('no-wrap, side').style(f'width: {col_widths[list_col['name']]}px'):
+                        ui.item_label(list_row[list_col["name"]])  # .classes('font-ui-monospace')
         return item
 
     mem = app.storage.general
