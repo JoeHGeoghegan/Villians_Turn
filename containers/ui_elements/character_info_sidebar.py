@@ -1,11 +1,7 @@
 # Imports
-import ast
-
 from nicegui import ui, app
 
 # local imports
-from functions.basics import df_to_dict
-from functions.game import turn_track
 from memory import set_user_mem
 
 

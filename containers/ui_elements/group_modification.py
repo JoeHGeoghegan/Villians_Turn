@@ -3,12 +3,12 @@ from nicegui import ui
 
 # Local Functions
 from functions.basics import mem_df_modify
-from functions.game import turn_track
 from functions.groups import breakup_group, groups_list, merge_groups, rename_group
+from functions.turn_table import turn_track_df
 
 
 def create_group_content(page: ui.refreshable):
-    groups = groups_list(turn_track())
+    groups = groups_list(turn_track_df())
 
     def clickable_group(head_page, head_group):
         item = ui.item(on_click=lambda: (group_click_handler(head_page, head_group, groups)))

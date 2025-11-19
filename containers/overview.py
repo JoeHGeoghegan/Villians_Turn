@@ -2,15 +2,16 @@
 from nicegui import ui, app
 
 ### Local Imports
-from containers.ui_combat import combat_interface
-from containers.ui_group import create_group_content
-from functions.game import peak_turn, set_turn, turn_track
+from containers.ui_elements.combat_interface import combat_interface
+from containers.ui_elements.group_modification import create_group_content
+from containers.ui_elements.turn_table_interface import turn_track_ui_list_create_content
+from functions.game import peak_turn, set_turn
 from functions.groups import groups_list
-from functions.table_control import game_list
+from functions.turn_table import turn_track_df
 from memory import set_mem
 
 
-def create_content(page: ui.refreshable):
+def create_content(page: ui.refreshable,sidebar: ui.refreshable):
     def update_content():
         ui_turn_number.update()
         ui_action_number.update()
@@ -22,8 +23,8 @@ def create_content(page: ui.refreshable):
     mem = app.storage.general
     user = app.storage.user
     # Turn Initialize
-    if mem["current_turn"] is None or not (mem["current_turn"] in groups_list(turn_track())):
-        mem["current_turn"] = turn_track().iloc[0]['group']
+    if mem["current_turn"] is None or not (mem["current_turn"] in groups_list(turn_track_df())):
+        mem["current_turn"] = turn_track_df().iloc[0]['group']
     ######## UI ########
     with ui.row():
         with ui.column():
@@ -38,7 +39,7 @@ def create_content(page: ui.refreshable):
                 }, value=mem["table_mode"], label="On Click Action",
                     on_change=lambda selector: (set_mem("table_mode", selector.value), page.refresh()))
             with ui.row():
-                game_list(user["type"], highlight_rows=True, page=page)
+                turn_track_ui_list_create_content(user["type"], highlight_rows=True, page=page, sidebar_page=sidebar)
         with ui.column():
             if user["type"] == "Host":
                 with ui.button_group().classes('flex justify-end'):
@@ -49,14 +50,14 @@ def create_content(page: ui.refreshable):
                     ui.select(sel_options, value=mem["turn_mode"],
                               on_change=lambda selector: set_mem("turn_mode", selector.value))
                     ui.button("Previous Turn",
-                              on_click=lambda e: (set_turn(turn_track(), mem["current_turn"], -1, mem["turn_mode"]),
+                              on_click=lambda e: (set_turn(turn_track_df(), mem["current_turn"], -1, mem["turn_mode"]),
                                                   update_content()))
                     ui.button("Next Turn",
-                              on_click=lambda e: (set_turn(turn_track(), mem["current_turn"], 1, mem["turn_mode"]),
+                              on_click=lambda e: (set_turn(turn_track_df(), mem["current_turn"], 1, mem["turn_mode"]),
                                                   update_content()))
                 with ui.column():
                     ui_current_turn = ui.label(f"Current Turn: {mem["current_turn"]}")
-                    ui_on_deck = ui.label(f"On Deck: {peak_turn(turn_track(), mem["current_turn"], 1)}")
+                    ui_on_deck = ui.label(f"On Deck: {peak_turn(turn_track_df(), mem["current_turn"], 1)}")
                     if mem["table_mode"] != "group":
                         combat_interface(page)
                     else:

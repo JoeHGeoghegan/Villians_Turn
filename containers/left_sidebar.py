@@ -1,26 +1,24 @@
 # Library Imports
 from nicegui import ui, app
 
-from containers import ui_character_info
-from memory import init_mem, init_table, init_user
-from memory import set_user_type
+# local import
+from containers.ui_elements import character_info_sidebar
+from memory import init_mem, init_table, init_user, set_user_type
 
-containing_page: ui.refreshable = None
-
-
-def update_content():
-    global containing_page
-    containing_page.refresh()
+main_container: ui.refreshable = None
+sidebar: ui.refreshable = None
 
 
-def create_content(page: ui.refreshable, self_page: ui.refreshable):
-    def refresh():
-        self_page.refresh()
-        page.refresh()
+def refresh():
+    global main_container, sidebar
+    main_container.refresh()
+    sidebar.refresh()
 
-    global containing_page
-    if containing_page is None:
-        containing_page = page
+def create_content(page: ui.refreshable, sidebar_page: ui.refreshable):
+    global main_container, sidebar
+    if main_container is None:
+        main_container = page
+        sidebar = sidebar_page
 
     # memory setup
     user = app.storage.user
@@ -46,4 +44,4 @@ def create_content(page: ui.refreshable, self_page: ui.refreshable):
                 If not host, no team assignable - Does not show unless character selected
                 ''')
     if user['character_focus'] != '':
-        ui_character_info.create_content(containing_page, self_page)
+        character_info_sidebar.create_content(main_container, sidebar)

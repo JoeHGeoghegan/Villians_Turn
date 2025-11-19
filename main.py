@@ -3,12 +3,12 @@ import asyncio
 
 from nicegui import ui, app
 
-import containers.character_editor as character_editor
+### Local Imports
+import containers.ui_elements.character_editor as character_editor
 import containers.left_sidebar as left_sidebar
 import containers.overview as overview
 import containers.right_hiding_sidebar as right_hiding_sidebar
 import containers.welcome as welcome
-### Local Imports
 from functions.groups import groups_gathered_check
 from memory import init_mem, init_table, init_user, set_user_type
 
@@ -60,9 +60,9 @@ async def main_page():
     main_container()
 
     with ui.left_drawer(top_corner=True, bottom_corner=True):
-        left_container(main_container)
+        left_container()
     with ui.right_drawer(value=False) as right_drawer:
-        right_container(main_container)
+        right_container()
 
     # main_container() # Refreshable container for main content
 
@@ -91,7 +91,7 @@ def main_container():
                     ui.markdown(md_file.read())
                 ui.button('Back', on_click=lambda x: back())
             elif user['selectable_view'][0] == "character_editor":
-                character_editor.create_content(main_container)
+                character_editor.create_content(main_container,left_container)
         # If no data, show welcome message relevant options
         elif all(cell is None for cell in mem['character_details'][0].values()):
             print("No Data - Showing Welcome")
@@ -99,20 +99,20 @@ def main_container():
         # If groups not yet gathered, show group gathering screen
         elif not groups_gathered_check(mem['character_details']):
             print("Groups not gathered - Showing Group Gather")
-            welcome.create_group_gather(main_container)
+            welcome.create_group_gather(main_container,left_container)
         else:
             print("Showing Overview")
-            overview.create_content(main_container)
+            overview.create_content(main_container,left_container)
 
 
 @ui.refreshable
-def left_container(head_page: ui.refreshable) -> None:
-    left_sidebar.create_content(head_page, left_container)
+def left_container() -> None:
+    left_sidebar.create_content(main_container, left_container)
 
 
 @ui.refreshable
-def right_container(head_page: ui.refreshable) -> None:
-    right_hiding_sidebar.create_content(head_page, right_container)
+def right_container() -> None:
+    right_hiding_sidebar.create_content(main_container, right_container)
 
 
 ############ Run Loop ##########

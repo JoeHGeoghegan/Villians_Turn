@@ -3,19 +3,19 @@ import pandas as pd
 from nicegui import ui, app
 from pandas import Series
 
-from functions.basics import dict_to_df, df_to_dict
 ### Local Imports
+from functions.basics import dict_to_df, df_to_dict
 from functions.characters import character_list, new_character, character_search, new_weapon, new_resource, new_feat, \
     new_feature, new_condition, new_inventory, new_resource_override
 from functions.database import resources_file_init
-from functions.table_control import game_list
+from containers.ui_elements.turn_table_interface import turn_track_ui_list_create_content
 
 # Page Temp Memory
 selected_character: dict = {}
 containing_page: ui.refreshable = None
 
 
-def create_content(page: ui.refreshable):
+def create_content(page: ui.refreshable,sidebar: ui.refreshable):
     # memory setup
     global selected_character
     global containing_page
@@ -86,7 +86,7 @@ def create_content(page: ui.refreshable):
                             ui.button("Add Spell Resources",
                                       on_click=lambda: (add_to_section("resources", resources_file_init(
                                           selected_character["character_details"]["name"],
-                                          "assets/database_structures/resources/addable_spell_resources_defaults.csv")),
+                                          "../../assets/database_structures/resources/addable_spell_resources_defaults.csv")),
                                                         page.refresh()
                                                         ))
                     with ui.tab_panel(feats):
@@ -144,7 +144,7 @@ def create_content(page: ui.refreshable):
         if all(cell is None for cell in mem['character_details'][0].values()):
             ui.label("No other characters exist")
         else:
-            game_list("Host", highlight_rows=False, page=page)
+            turn_track_ui_list_create_content("Host", highlight_rows=False, page=page, sidebar_page=sidebar)
 
 
 def character_save(character):
