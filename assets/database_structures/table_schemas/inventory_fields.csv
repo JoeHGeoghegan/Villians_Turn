@@ -1,4 +1,4 @@
-character_name,name
-character_name,Item Name
-character_name,string
-character_name,
+character_name,name,weight
+character_name,Item Name,weight
+character_name,string,int
+character_name,,

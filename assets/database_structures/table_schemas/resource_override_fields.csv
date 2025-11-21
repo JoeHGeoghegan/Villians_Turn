@@ -1,4 +1,4 @@
 character_name,resource_name,override_type,override_resource_type,override_resource_type_trigger_time,override_resource_use_type,override_current,override_max,override_min,override_proficiency,override_attribute
-character_name,resource_name,Override Type,Override ResourceType,Override Resource Typ Trigger Time,Override Resource Use Type,Override Current,Override Max,Override Min,Override Proficiency,Override Attribute
+character_name,Resource to Override,Override Type,Override Resource Type,Override Resource Type Trigger Time,Override Resource Use Type,Override Current,Override Max,Override Min,Override Proficiency,Override Attribute
 character_name,character_resources,override_type,resource_type,resource_type_trigger_time,resource_use_type,int,int,int,bool,attribute
 character_name,,,,,,,,,,

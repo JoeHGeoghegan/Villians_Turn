@@ -85,31 +85,3 @@ def character_search(character_name):
         "resource_override": df_to_dict(
             df_match_slice(dict_to_df(mem["resource_override"]), "character_name", character_name))
     }
-
-
-def new_weapon():
-    pass
-
-
-def new_resource():
-    pass
-
-
-def new_feat():
-    pass
-
-
-def new_feature():
-    pass
-
-
-def new_condition():
-    pass
-
-
-def new_inventory():
-    pass
-
-
-def new_resource_override():
-    pass

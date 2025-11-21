@@ -38,6 +38,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\assets\database_structures\datablocks\conditions.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\assets\database_structures\datablocks\feats.csv">
           <value>
             <Attribute>
