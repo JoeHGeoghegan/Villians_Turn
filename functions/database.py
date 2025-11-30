@@ -1,3 +1,4 @@
+import ast
 import csv
 
 import pandas as pd
@@ -16,7 +17,7 @@ def schema_to_dict(path):
         "headers": list(data[0].keys()),
         "labels": data[0],
         "types": data[1],
-        "defaults": data[2]
+        "defaults": ast.literal_eval(data[2])
     }
 
 

@@ -1,4 +1,6 @@
 # Library Imports
+import ast
+
 import pandas as pd
 from nicegui import ui, app
 from pandas import Series
@@ -6,6 +8,7 @@ from pandas import Series
 ### Local Imports
 from functions.basics import dict_to_df, df_to_dict
 from functions.characters import character_list, new_character, character_search
+from functions.data import export_character_data
 from functions.database import resources_file_init
 from containers.ui_elements.turn_table_interface import turn_track_ui_list_create_content
 
@@ -48,9 +51,6 @@ def create_content(page: ui.refreshable,sidebar: ui.refreshable):
 
         # Character Details
         ui.markdown('###Character Editor')
-        with ui.row():
-            ui.button("Print Character Details Mem",
-                      on_click=lambda: print(mem['character_details']))  # TODO Temporary Debug Button
         with ui.card():
             with ui.card_section():
                 with ui.row():
@@ -67,49 +67,51 @@ def create_content(page: ui.refreshable,sidebar: ui.refreshable):
                 with ui.tab_panels(tabs, value=weapons_tab).classes('w-full'):
                     weapons_panel = ui.tab_panel(weapons_tab)
                     if len(selected_character["weapons"]) > 0:
-                        make_entry_cards(weapons_panel, "weapons",
-                                         [["Add Weapon", lambda: new_weapon()]])
+                        make_entry_cards(weapons_panel, "weapons")
+                    make_button_row(weapons_panel,[["Add Weapon", lambda: new_weapon()]])
                     resources_panel = ui.tab_panel(resources_tab)
                     if len(selected_character["resources"]) > 0:
-                        make_entry_cards(resources_panel, "resources",
-                                         [["Add Resource",lambda: new_resource()],
-                                          ["Add Spell Resources",lambda:
-                                              add_to_section("resources", resources_file_init(
-                                              selected_character["character_details"]["name"],
-                                              "assets/database_structures/resources/addable_spell_resources_defaults.csv"))]
-                                          ])
+                        make_entry_cards(resources_panel, "resources")
+                    make_button_row(resources_panel,[["Add Resource",lambda: new_resource()],
+                                      ["Add Spell Resources",lambda:
+                                          add_to_section("resources", resources_file_init(
+                                          selected_character["character_details"]["name"],
+                                          "assets/database_structures/resources/addable_spell_resources_defaults.csv"))]
+                                      ])
                     feats_panel = ui.tab_panel(feats_tab)
                     if len(selected_character["feats"]) > 0:
                         make_search_cards(feats_panel, "feats", "feats",
-                                          "Feat", None,
-                                          [["Add Feat", lambda: new_feat()]])
+                                          "Feat", None)
+                    make_button_row(feats_panel,[["Add Feat", lambda: new_feat()]])
                     features_panel = ui.tab_panel(features_tab)
                     if len(selected_character["features"]) > 0:
                         make_search_cards(features_panel, "features", "features",
-                                          "Features", "Description",
-                                          [["Add Feature", lambda: new_feature()]])
+                                          "Features", "Description")
+                    make_button_row(features_panel,[["Add Feature", lambda: new_feature()]])
                     conditions_panel = ui.tab_panel(conditions_tab)
                     if len(selected_character["conditions"]) > 0:
                         make_search_cards(conditions_panel, "conditions", "conditions",
-                                          "Condition", "Description",
-                                          [["Add Condition", lambda: new_condition()]])
+                                          "Condition", "Description")
+                    make_button_row(conditions_panel,[["Add Condition", lambda: new_condition()]])
                     inventory_panel = ui.tab_panel(inventory_tab)
                     if len(selected_character["inventory"]) > 0:
                         make_search_cards(inventory_panel, "inventory","items",
-                                         "Item",None,
-                                         [["Add Inventory", lambda: new_inventory()]])
+                                         "Item",None)
+                    make_button_row(inventory_panel,[["Add Inventory", lambda: new_inventory()]])
                     resource_override_panel = ui.tab_panel(resource_override_tab)
                     if len(selected_character["resource_override"]) > 0:
-                        make_entry_cards(resource_override_panel, "resource_override",
-                                         [["Add Resource Override", lambda: new_resource_override()]])
+                        make_entry_cards(resource_override_panel, "resource_override")
+                    make_button_row(resource_override_panel,[["Add Resource Override", lambda: new_resource_override()]])
         ui.button("Save", on_click=lambda: (character_save(selected_character), page.refresh()))
+        ui.button("Export", on_click=lambda: export_character_data())
+
     with ui.column():
         if all(cell is None for cell in mem['character_details'][0].values()):
             ui.label("No other characters exist")
         else:
             turn_track_ui_list_create_content("Host", highlight_rows=False, page=page, sidebar_page=sidebar)
 
-def make_entry_cards(tab_panel,mem_section,end_buttons):
+def make_entry_cards(tab_panel,mem_section):
     mem = app.storage.general
 
     with tab_panel:
@@ -123,12 +125,9 @@ def make_entry_cards(tab_panel,mem_section,end_buttons):
                         delete_icon = ui.icon("delete", color='primary').classes('text-5xl')
                         delete_icon.tooltip(f'Delete')
                         delete_icon.on('click', lambda: remove_character_data(mem_section, index))
-        with ui.row():
-            for button_items in end_buttons:
-                ui.button(button_items[0],on_click=button_items[1])
 
 
-def make_search_cards(tab_panel, mem_section, search_datablock, search_datablock_column, search_datablock_description_column, end_buttons):
+def make_search_cards(tab_panel, mem_section, search_datablock, search_datablock_column, search_datablock_description_column):
     with tab_panel:
         for index,values in enumerate(selected_character[mem_section]):
             with ui.card():
@@ -140,56 +139,59 @@ def make_search_cards(tab_panel, mem_section, search_datablock, search_datablock
                         delete_icon = ui.icon("delete", color='primary').classes('text-5xl')
                         delete_icon.tooltip(f'Delete')
                         delete_icon.on('click', lambda: remove_character_data(mem_section, index))
-            with ui.row():
-                for button_items in end_buttons:
-                    ui.button(button_items[0], on_click=button_items[1])
+
+def make_button_row(tab_panel,end_buttons):
+    with tab_panel:
+        with ui.row():
+            for button_items in end_buttons:
+                ui.button(button_items[0], on_click=button_items[1])
 
 def refresh_tab(tab):
     if tab == "weapons":
         weapons_panel.clear()
         if len(selected_character["weapons"]) > 0:
-            make_entry_cards(weapons_panel, "weapons",
-                             [["Add Weapon", lambda: new_weapon()]])
+            make_entry_cards(weapons_panel, "weapons")
+        make_button_row(weapons_panel,[["Add Weapon", lambda: new_weapon()]])
     elif tab == "resources":
         resources_panel.clear()
         if len(selected_character["resources"]) > 0:
-            make_entry_cards(resources_panel, "resources",
-                             [["Add Resource", lambda: new_resource()],
-                              ["Add Spell Resources",
-                               lambda: (add_to_section("resources", resources_file_init(
-                                   selected_character["character_details"]["name"],
-                                   "../../assets/database_structures/resources/addable_spell_resources_defaults.csv")),
-                                        refresh_tab("resources"))]
-                              ])
+            make_entry_cards(resources_panel, "resources")
+        make_button_row(resources_panel,[["Add Resource", lambda: new_resource()],
+                          ["Add Spell Resources",
+                           lambda: (add_to_section("resources", resources_file_init(
+                               selected_character["character_details"]["name"],
+                               "../../assets/database_structures/resources/addable_spell_resources_defaults.csv")),
+                                    refresh_tab("resources"))]
+                          ])
     elif tab == "feats":
         feats_panel.clear()
         if len(selected_character["feats"]) > 0:
             make_search_cards(feats_panel, "feats", "feats",
-                              "Feat", None,
-                              [["Add Feat", lambda: new_feat()]])
+                              "Feat", None)
+        make_button_row(feats_panel,[["Add Feat", lambda: new_feat()]])
     elif tab == "features":
         features_panel.clear()
         if len(selected_character["features"]) > 0:
             make_search_cards(features_panel, "features", "features",
-                              "Features", "Description",
-                              [["Add Feature", lambda: new_feature()]])
+                              "Features", "Description")
+        make_button_row(features_panel,[["Add Feature", lambda: new_feature()]])
     elif tab == "conditions":
         conditions_panel.clear()
         if len(selected_character["conditions"]) > 0:
             make_search_cards(conditions_panel, "conditions", "conditions",
-                              "Condition", "Description",
-                              [["Add Condition", lambda: new_condition()]])
+                              "Condition", "Description")
+        make_button_row(conditions_panel,[["Add Condition", lambda: new_condition()]])
     elif tab == "inventory":
         inventory_panel.clear()
         if len(selected_character["inventory"]) > 0:
             make_search_cards(inventory_panel, "inventory", "items",
-                              "Item", None,
-                              [["Add Inventory", lambda: new_inventory()]])
+                              "Item", None)
+        make_button_row(inventory_panel,[["Add Inventory", lambda: new_inventory()]])
     elif tab == "resource_override":
         resource_override_panel.clear()
         if len(selected_character["resource_override"]) > 0:
-            make_entry_cards(resource_override_panel, "resource_override",
-                             [["Add Resource Override", lambda: new_resource_override()]])
+            make_entry_cards(resource_override_panel, "resource_override")
+        make_button_row(resource_override_panel,[["Add Resource Override", lambda: new_resource_override()]])
 
 def character_save(character):
     mem = app.storage.general
@@ -254,6 +256,8 @@ def add_to_section(section, new_item):
 def set_character_data(section, index, key, new_value):
     if type(new_value) == float:
         new_value = int(new_value)
+    if type(new_value) == float:
+        new_value = ast.literal_eval(new_value)
     global selected_character
     selected_character[section][index][key] = new_value
 
@@ -263,8 +267,10 @@ def remove_character_data(section, index):
     refresh_tab(section)
 
 def set_character_detail(key, new_value):
-    if type(new_value) == float:
+    if type(new_value) == str:
         new_value = int(new_value)
+    if type(new_value) == float:
+        new_value = ast.literal_eval(new_value)
     global selected_character
     selected_character["character_details"][key] = new_value
 
@@ -352,17 +358,22 @@ def search_field(mem_section, datablock, search_column, description_column, inde
         with ui.dialog() as dialog, ui.card():
             ui.label(f'Find {datablock}')
 
-            selected = ui.select(select_list, label=f'Choose {datablock}',on_change=lambda : refresh_tab(mem_section))
-
+            selected = ui.select(select_list, label=f'Choose {datablock}',on_change=lambda : detail_text.update())
+            detail_text= ui.markdown("")
             if selected.value is not None and description_column is not None:
-                ui.markdown(datablock_df.loc[datablock_df[search_column] == data_value, description_column])
+                detail_text.set_content(datablock_df.loc[datablock_df[search_column] == data_value, description_column])
 
             with ui.row():
                 ui.button('Close', on_click=dialog.close)
-                ui.button('Submit', on_click=lambda: (
+                if "weight" in mem["schemas"][mem_section]["headers"]:
+                    what_to_save = lambda: (set_character_data(mem_section, index, 'name', selected.value),
+                                            set_character_data(mem_section, index, 'weight',
+                                                               datablock_df.loc[datablock_df[search_column] == data_value, "Weight"]))
+                else:
+                    what_to_save = lambda: set_character_data(mem_section, index, 'name', selected.value)
+                ui.button('Submit', on_click=(what_to_save, lambda: (
                     dialog.close(),
-                    set_character_data(mem_section, index, 'name', selected.value),
-                    refresh_tab(mem_section)
+                    refresh_tab(mem_section))
                 ))
 
         dialog.open()

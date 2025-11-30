@@ -18,6 +18,14 @@ def create_content(page: ui.refreshable, self_page: ui.refreshable):
 
     ui.button('View Rule Changes', on_click=lambda: set_markdown_view('assets/texts/RuleChanges.md'))
     ui.button('View CSV Template Details', on_click=lambda: set_markdown_view('assets/texts/csv_details.md'))
+
+    def create_characters(head_page: ui.refreshable):
+        app.storage.user["selectable_view"] = ["character_editor"]
+        # sidebar.toggle()
+        head_page.refresh()
+
+    ui.button("Character Editor", on_click=lambda: create_characters(page))#, self_page))
+
     ui.markdown('''
                 ### Admin/Game Options
                 * "Rule Changes"

@@ -12,7 +12,7 @@ from functions.game import roll_dice
 #####################################
 ## Info
 def groups_list(characters: pd.DataFrame):
-    return characters['group'].unique()
+    return characters['group'].unique().tolist()
 
 
 def person_is_alone(characters: pd.DataFrame, person):
@@ -136,7 +136,7 @@ def move_character(characters: pd.DataFrame, person_to_move, destination_group):
 
 def move_character_to_new_group(characters: pd.DataFrame, person_to_move, new_group_name):
     df = characters.copy()
-    old_group = df.loc[(df["name"] == person_to_move, "group")].values[0]
+    old_group = df.loc[(df["name"] == person_to_move, "group")].values[0]#TODO Flagged by IDE, should retest
     df.loc[(df["name"] == person_to_move, "group")] = new_group_name
     if df[df['group'] == old_group].empty:
         return df  # If character was the only member of a group, no need to rearrange

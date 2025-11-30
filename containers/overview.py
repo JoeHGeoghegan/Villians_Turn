@@ -5,9 +5,9 @@ from nicegui import ui, app
 from containers.ui_elements.combat_interface import combat_interface
 from containers.ui_elements.group_modification import create_group_content
 from containers.ui_elements.turn_table_interface import turn_track_ui_list_create_content
+from functions.basics import dict_to_df
 from functions.game import peak_turn, set_turn
 from functions.groups import groups_list
-from functions.turn_table import turn_track_df
 from memory import set_mem
 
 
@@ -23,8 +23,9 @@ def create_content(page: ui.refreshable,sidebar: ui.refreshable):
     mem = app.storage.general
     user = app.storage.user
     # Turn Initialize
-    if mem["current_turn"] is None or not (mem["current_turn"] in groups_list(turn_track_df())):
-        mem["current_turn"] = turn_track_df().iloc[0]['group']
+    groups = groups_list(dict_to_df(mem["character_details"]))
+    if mem["current_turn"] is None or not (mem["current_turn"] in groups):
+        mem["current_turn"] = groups[0]
     ######## UI ########
     with ui.row():
         with ui.column():
@@ -50,14 +51,14 @@ def create_content(page: ui.refreshable,sidebar: ui.refreshable):
                     ui.select(sel_options, value=mem["turn_mode"],
                               on_change=lambda selector: set_mem("turn_mode", selector.value))
                     ui.button("Previous Turn",
-                              on_click=lambda e: (set_turn(turn_track_df(), mem["current_turn"], -1, mem["turn_mode"]),
-                                                  update_content()))
+                              on_click=lambda e: (set_turn(dict_to_df(mem["character_details"]), mem["current_turn"],
+                                                           -1, mem["turn_mode"]), update_content()))
                     ui.button("Next Turn",
-                              on_click=lambda e: (set_turn(turn_track_df(), mem["current_turn"], 1, mem["turn_mode"]),
-                                                  update_content()))
+                              on_click=lambda e: (set_turn(dict_to_df(mem["character_details"]), mem["current_turn"],
+                                                           1, mem["turn_mode"]),update_content()))
                 with ui.column():
                     ui_current_turn = ui.label(f"Current Turn: {mem["current_turn"]}")
-                    ui_on_deck = ui.label(f"On Deck: {peak_turn(turn_track_df(), mem["current_turn"], 1)}")
+                    ui_on_deck = ui.label(f"On Deck: {peak_turn(dict_to_df(mem["character_details"]), mem["current_turn"], 1)}")
                     if mem["table_mode"] != "group":
                         combat_interface(page)
                     else:

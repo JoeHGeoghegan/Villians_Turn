@@ -14,10 +14,8 @@ from functions.database import resources_file_init
 def character_list():
     characters = dict_to_df(app.storage.general['character_details'])
     if characters is None:
-        print("No characters found.")
         return []
     else:
-        print(f"Character List: {characters['name'].unique().tolist()}")
         return characters["name"].unique().tolist()
 
 

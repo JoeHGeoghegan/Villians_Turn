@@ -3,7 +3,7 @@ import pandas as pd
 from nicegui import app
 
 
-def dict_to_df(data):
+def dict_to_df(data:dict):
     """Convert dict or list of dicts to DataFrame"""
     if isinstance(data, dict):
         return pd.DataFrame([data])
@@ -22,7 +22,7 @@ def mem_df_modify(df_name: str, func, *args):
     mem = app.storage.general
     df = dict_to_df(mem[df_name])
     df = func(df, *args)
-    mem[df_name] = dict_to_df(df)
+    mem[df_name] = df_to_dict(df)
 
 
 def mem_df_use(df_name: str, func, *args):

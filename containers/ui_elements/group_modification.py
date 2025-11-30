@@ -1,14 +1,15 @@
 # Imports
-from nicegui import ui
+from nicegui import ui,app
 
 # Local Functions
-from functions.basics import mem_df_modify
-from functions.groups import breakup_group, groups_list, merge_groups, rename_group
-from functions.turn_table import turn_track_df
+from functions.basics import mem_df_modify, dict_to_df
+from functions.groups import breakup_group, groups_list, merge_groups, rename_group, move_character, \
+    move_character_to_new_group
 
 
 def create_group_content(page: ui.refreshable):
-    groups = groups_list(turn_track_df())
+    mem = app.storage.general
+    groups = groups_list(dict_to_df(mem["character_details"]))
 
     def clickable_group(head_page, head_group):
         item = ui.item(on_click=lambda: (group_click_handler(head_page, head_group, groups)))
@@ -30,14 +31,14 @@ def group_click_handler(page: ui.refreshable, group, groups):
         with ui.row():
             name = ui.input("Name", value=group)
             if name != group:
-                ui.button("Change", on_click=lambda: (mem_df_modify("turn_track",
+                ui.button("Change", on_click=(lambda: (mem_df_modify("character_details",
                                                                     rename_group,
                                                                     *(group, name.value)),
-                                                      dialog.close, page.refresh()))
-        ui.button('Breakup Group', on_click=lambda: (mem_df_modify("turn_track",
+                                                      page.refresh(),dialog.close)))
+        ui.button('Breakup Group', on_click=(lambda: (mem_df_modify("character_details",
                                                                    breakup_group,
                                                                    group),
-                                                     dialog.close, page.refresh()))
+                                                     page.refresh(),dialog.close)))
         with ui.list().style('width: fit-content;').props('bordered separator'):
             with ui.item().props('dense'):
                 ui.item_label("Merge with another Group")
@@ -59,21 +60,41 @@ def group_click_handler(page: ui.refreshable, group, groups):
 
 def merge_group_dialog(page: ui.refreshable, group1, group2):
     with ui.dialog() as dialog, ui.card():
-        ui.button(f'Set name to {group1}', on_click=lambda: (mem_df_modify("turn_track",
+        ui.button(f'Set name to {group1}', on_click=(lambda: (mem_df_modify("character_details",
                                                                            merge_groups,
                                                                            *(group1, group2, group1)),
-                                                             dialog.close, page.refresh()))
-        ui.button(f'Set name to {group2}', on_click=lambda: (mem_df_modify("turn_track",
+                                                             page.refresh(),dialog.close)))
+        ui.button(f'Set name to {group2}', on_click=(lambda: (mem_df_modify("character_details",
                                                                            merge_groups,
                                                                            *(group1, group2, group2)),
-                                                             dialog.close, page.refresh()))
+                                                             page.refresh(),dialog.close)))
         with ui.row():
             new_name = ui.input("Name", placeholder="Or enter new name")
             if new_name.value is not None:
-                ui.button("Confirm", on_click=lambda: (mem_df_modify("turn_track",
+                ui.button("Confirm", on_click=(lambda: (mem_df_modify("character_details",
                                                                      merge_groups,
                                                                      *(group1, group2, new_name.value)),
-                                                       dialog.close, page.refresh()))
+                                                       page.refresh(),dialog.close)))
 
         ui.button('Back', on_click=dialog.close)
+    dialog.open()
+
+def turn_table_character_group_click_dialog(page: ui.refreshable, character):
+    with ui.dialog() as dialog, ui.card():
+        mem = app.storage.general
+        characters = dict_to_df(mem["character_details"])
+        with ui.row():
+            ui.markdown(f'"**{character}**" is currently in group "**{characters[characters["name"]==character]["group"].iloc[0]}**"')
+        group_target = ui.select(options=groups_list(characters),label="Groups")
+        new_group_target = ui.input(label="New Group Name")
+        with ui.row():
+            move_button = ui.button("Move to Group", on_click=(lambda: (move_character(characters, character, group_target),
+                                                                        page.refresh(),dialog.close)))
+            new_move_button = ui.button("Move to New Group", on_click=(lambda: (move_character_to_new_group(characters, character, group_target),
+                                                                        page.refresh(),dialog.close)))
+            ui.button('Back', on_click=dialog.close)
+        if group_target.value is None: move_button.disable()
+        else: move_button.enable()
+        if new_group_target.value is None: new_move_button.disable()
+        else: new_move_button.enable()
     dialog.open()

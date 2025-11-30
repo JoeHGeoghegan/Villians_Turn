@@ -9,6 +9,7 @@ import containers.left_sidebar as left_sidebar
 import containers.overview as overview
 import containers.right_hiding_sidebar as right_hiding_sidebar
 import containers.welcome as welcome
+from functions.basics import dict_to_df
 from functions.groups import groups_gathered_check
 from memory import init_mem, init_table, init_user, set_user_type
 
@@ -75,12 +76,11 @@ def main_container():
     user = app.storage.user
     with ui.column():
         if len(user['selectable_view']) > 0:
+            def back():
+                user['selectable_view'] = []
+                main_container.refresh()
             if user['selectable_view'][0] == "markdown":
                 print("Showing Markdown View")
-
-                def back():
-                    user['selectable_view'] = []
-                    main_container.refresh()
 
                 if user['selectable_view'][1][-len("csv_details.md"):] == "csv_details.md":
                     ui.button("Download Template CSV",
@@ -91,13 +91,14 @@ def main_container():
                     ui.markdown(md_file.read())
                 ui.button('Back', on_click=lambda x: back())
             elif user['selectable_view'][0] == "character_editor":
+                ui.button('Back', on_click=lambda x: back())
                 character_editor.create_content(main_container,left_container)
         # If no data, show welcome message relevant options
-        elif all(cell is None for cell in mem['character_details'][0].values()):
+        elif all(value is None for value in mem['character_details'][0].values()):
             print("No Data - Showing Welcome")
             welcome.create_content(main_container)
         # If groups not yet gathered, show group gathering screen
-        elif not groups_gathered_check(mem['character_details']):
+        elif not groups_gathered_check(dict_to_df(mem['character_details'])):
             print("Groups not gathered - Showing Group Gather")
             welcome.create_group_gather(main_container,left_container)
         else:

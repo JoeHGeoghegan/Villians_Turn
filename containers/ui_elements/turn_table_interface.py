@@ -1,5 +1,6 @@
 from nicegui import ui, app
 
+from containers.ui_elements.group_modification import turn_table_character_group_click_dialog
 from functions.data import df_max_lengths_in_cols
 from functions.turn_table import turn_table_display_filter_df
 
@@ -20,10 +21,10 @@ def turn_track_ui_list_create_content(user_type, highlight_rows, page: ui.refres
     def list_creator(list_row):
         op_mode = "table_click"
         if list_row['group'] == mem['current_turn'] and highlight_rows:
-            item = ui.item(on_click=lambda: (turn_track_ui_list_row_click_handler(list_row["name"], True, op_mode), page.refresh()))
+            item = ui.item(on_click=lambda: turn_track_ui_list_row_click_handler(list_row["name"], True, op_mode))
             item.classes('w-full items-center highlighted-row')
         else:
-            item = ui.item(on_click=lambda: (turn_track_ui_list_row_click_handler(list_row["name"], False, op_mode), page.refresh()))
+            item = ui.item(on_click=lambda: turn_track_ui_list_row_click_handler(list_row["name"], False, op_mode))
         with item.props('dense'):
             for list_col in cols:
                 if list_col['name'] == "name":
@@ -113,9 +114,8 @@ def turn_track_ui_list_row_click_handler(name, if_turn, op_mode):
             ui.notify(f"{name} wasn't in the target select...huh")
         refresh()
     elif operation == 'group':
-        return
+        turn_table_character_group_click_dialog(main_container,name)
     elif operation == 'info':
         user['character_focus'] = name
         print(user['character_focus'])
         refresh()
-    print(mem["turn_data"])  # TODO DEBUG

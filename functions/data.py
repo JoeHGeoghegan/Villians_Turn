@@ -1,13 +1,12 @@
 # Imports
+import json
+
 import pandas as pd
 from nicegui import ui, app
-
-from functions.basics import split_column_list, df_to_dict
-
+from datetime import datetime
 
 ## Local Imports
-# from functions.groups import individual_groups
-
+from functions.basics import split_column_list, df_to_dict
 
 ####################################
 ########## Data Functions ##########
@@ -28,6 +27,25 @@ def import_file(refresh_target: ui.refreshable, file_path, database_target, impo
     mem[database_target] = df_to_dict(data)
     refresh_target.refresh()
 
+def export_character_data():
+    mem = app.storage.general
+    data_list = [
+        mem['character_details'],
+        mem['conditions'],
+        mem['feats'],
+        mem['features'],
+        mem['inventory'],
+        mem['resource_override'],
+        mem['resources'],
+        mem['skills'],
+        mem['weapons']
+    ]
+
+    now = datetime.now()
+    formatted_time = now.strftime("%Y-%m-%d_%H:%M:%S")
+
+    json_content = json.dumps(data_list, indent=2)
+    ui.download.content(json_content, f'VilliansTurnExport_{formatted_time}.json')
 
 def read_audit(path):
     audit_tags = {}

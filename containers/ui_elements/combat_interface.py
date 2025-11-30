@@ -1,8 +1,7 @@
 # Library Imports
 from nicegui import ui, app
 
-# Local Imports
-from functions.turn_table import turn_track_df
+from functions.basics import dict_to_df
 
 actors: ui.select = None
 targets: ui.select = None
@@ -16,10 +15,10 @@ def combat_interface(page: ui.refreshable):
 
     # memory setup
     mem = app.storage.general
-
-    all_characters = turn_track_df()["name"].to_list()
+    turn_track = dict_to_df(mem["character_details"])
+    all_characters = turn_track["name"].to_list()
     all_characters.append("Non-Tracked Entity")
-    active_characters = turn_track_df()[turn_track_df()["group"] == mem["current_turn"]]["name"]
+    active_characters = turn_track[turn_track["group"] == mem["current_turn"]]["name"]
     active_characters = active_characters.to_list()
     active_characters.append("Non-Tracked Entity")
     with ui.column():
