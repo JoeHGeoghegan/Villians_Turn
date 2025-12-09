@@ -1,5 +1,6 @@
 # Library Imports
 import ast
+import math
 
 import pandas as pd
 from nicegui import ui, app
@@ -44,7 +45,7 @@ def create_content(page: ui.refreshable,sidebar: ui.refreshable):
         # Character Select UI
         character_selector = ui.select(all_characters + ["New Character"],
                                        value=selected_character["character_details"]["name"],
-                                       on_change=lambda character_name: select_character(character_name.value))
+                                       on_change=lambda character_name: select_character(character_name.value)).classes('w-64')
         # Disable if no other character
         if len(all_characters) == 0 or all_characters == ["New Character"]: character_selector.disable()
         else: character_selector.enable()# Normal selector
@@ -278,8 +279,11 @@ def entry_fields(mem_section, header_list, index=0):
     global selected_character
     mem = app.storage.general
     head_table = True if mem_section == "character_details" else False
+    def length_calc(value:str):
+        return math.floor(5+len(value)*2.5)
     for header in header_list:
         label = mem["schemas"][mem_section]["labels"][header]  # only need the specific label and type
+        label_length = length_calc(label)
         entry_type = mem["schemas"][mem_section]["types"][header]
         if head_table:
             data_value = selected_character[mem_section][header]
@@ -289,7 +293,7 @@ def entry_fields(mem_section, header_list, index=0):
         if type(data_value) == Series:
             data_value = data_value.iloc[0]
         if entry_type == "character_name" and head_table:
-            ui.input(label=label, value=data_value, on_change=lambda e: rename_character(e.value))
+            ui.input(label=label, value=data_value, on_change=lambda e: rename_character(e.value)).classes(f'w-{label_length}')
         elif entry_type == "character_name" and not head_table:
             pass
         elif entry_type == "int":
@@ -300,19 +304,21 @@ def entry_fields(mem_section, header_list, index=0):
                 ui.number(label=label, value=data_value, on_change=lambda e, h=header:
                 set_character_data(mem_section, index, h, e.value))
         elif entry_type == "string":
+            if length_calc(data_value) > label_length:
+                label_length = length_calc(data_value)
             if head_table:
                 ui.input(label=label, value=data_value, on_change=lambda e, h=header:
-                set_character_detail(h, e.value))
+                set_character_detail(h, e.value)).classes(f'w-{label_length}')
             else:
                 ui.input(label=label, value=data_value, on_change=lambda e, h=header:
-                set_character_data(mem_section, index, h, e.value))
+                set_character_data(mem_section, index, h, e.value)).classes(f'w-{label_length}')
         elif entry_type == "dice_equation":  # Same as String but with validation. #TODO add validation (Try/Except on dice roll?)
             if head_table:
                 ui.input(label=label, value=data_value, on_change=lambda e, h=header:
-                set_character_detail(h, e.value))
+                set_character_detail(h, e.value)).classes(f'w-{label_length}')
             else:
                 ui.input(label=label, value=data_value, on_change=lambda e, h=header:
-                set_character_data(mem_section, index, h, e.value))
+                set_character_data(mem_section, index, h, e.value)).classes(f'w-{label_length}')
         elif entry_type == "bool":
             if head_table:
                 ui.checkbox(text=label, value=data_value, on_change=lambda e, h=header:
@@ -324,19 +330,19 @@ def entry_fields(mem_section, header_list, index=0):
             if head_table:
                 ui.select(options=[resource["name"] for resource in selected_character["resources"]],
                           label=label, value=data_value,
-                          on_change=lambda e: set_character_detail(header, e.value))
+                          on_change=lambda e: set_character_detail(header, e.value)).classes(f'w-{label_length}')
             else:
                 ui.select(options=[resource["name"] for resource in selected_character["resources"]],
                           label=label, value=data_value,
-                          on_change=lambda e, h=header: set_character_data(mem_section, index, h, e.value))
+                          on_change=lambda e, h=header: set_character_data(mem_section, index, h, e.value)).classes(f'w-{label_length}')
         else:
             if head_table:
                 ui.select(options=mem["lists"][entry_type], label=label, value=data_value,
-                          on_change=lambda e: set_character_detail(header, e.value))
+                          on_change=lambda e: set_character_detail(header, e.value)).classes(f'w-{label_length}')
             else:
                 ui.select(options=mem["lists"][entry_type], label=label,
                           value=data_value,
-                          on_change=lambda e, h=header: set_character_data(mem_section, index, h, e.value))
+                          on_change=lambda e, h=header: set_character_data(mem_section, index, h, e.value)).classes(f'w-{label_length}')
 
 
 def search_field(mem_section, datablock, search_column, description_column, index):
@@ -358,7 +364,7 @@ def search_field(mem_section, datablock, search_column, description_column, inde
         with ui.dialog() as dialog, ui.card():
             ui.label(f'Find {datablock}')
 
-            selected = ui.select(select_list, label=f'Choose {datablock}',on_change=lambda : detail_text.update())
+            selected = ui.select(select_list, label=f'Choose {datablock}',on_change=lambda : detail_text.update()).classes('w-32')
             detail_text= ui.markdown("")
             if selected.value is not None and description_column is not None:
                 detail_text.set_content(datablock_df.loc[datablock_df[search_column] == data_value, description_column])
@@ -398,7 +404,7 @@ def search_field(mem_section, datablock, search_column, description_column, inde
     if type(data_value) == Series:
         data_value = data_value.iloc[0]
     ui.input(label=label, value=data_value, on_change=lambda e:
-        set_character_data(mem_section, index, "name", e.value))
+        set_character_data(mem_section, index, "name", e.value)).classes('w-32')
     if "weight" in mem["schemas"][mem_section]["headers"]:
         ui.number(label=mem["schemas"][mem_section]["labels"]["weight"], value=selected_character[mem_section][index]["weight"],
                   on_change=lambda e :set_character_data(mem_section, index, "weight", e.value))

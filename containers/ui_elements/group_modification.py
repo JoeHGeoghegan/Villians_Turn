@@ -83,18 +83,17 @@ def turn_table_character_group_click_dialog(page: ui.refreshable, character):
     with ui.dialog() as dialog, ui.card():
         mem = app.storage.general
         characters = dict_to_df(mem["character_details"])
+        groups = groups_list(characters)
+        character_group = characters[characters["name"] == character]["group"].iloc[0]
         with ui.row():
-            ui.markdown(f'"**{character}**" is currently in group "**{characters[characters["name"]==character]["group"].iloc[0]}**"')
-        group_target = ui.select(options=groups_list(characters),label="Groups")
-        new_group_target = ui.input(label="New Group Name")
+            ui.markdown(f'"**{character}**" is currently in group "**{character_group}**"')
+        groups.remove(character_group)
+        group_target = ui.select(options=groups,label="Groups",value=groups[0]).classes('w-32')
+        ui.input(label="New Group Name", value=character_group)
         with ui.row():
-            move_button = ui.button("Move to Group", on_click=(lambda: (move_character(characters, character, group_target),
-                                                                        page.refresh(),dialog.close)))
-            new_move_button = ui.button("Move to New Group", on_click=(lambda: (move_character_to_new_group(characters, character, group_target),
-                                                                        page.refresh(),dialog.close)))
-            ui.button('Back', on_click=dialog.close)
-        if group_target.value is None: move_button.disable()
-        else: move_button.enable()
-        if new_group_target.value is None: new_move_button.disable()
-        else: new_move_button.enable()
+            ui.button("Move to Group", on_click=(lambda: (move_character(characters, character, group_target),
+                                                                    page.refresh(),dialog.close))).classes('w-32')
+            ui.button("Move to New Group", on_click=(lambda: (move_character_to_new_group(characters, character, group_target),
+                                                                    page.refresh(),dialog.close))).classes('w-32')
+            ui.button('Back', on_click=dialog.close).classes('w-32')
     dialog.open()
