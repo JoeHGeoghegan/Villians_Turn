@@ -20,6 +20,7 @@ def combat_interface(page: ui.refreshable):
     all_characters.append("Non-Tracked Entity")
     active_characters = turn_track[turn_track["group"] == mem["current_turn"]]["name"]
     active_characters = active_characters.to_list()
+    active_characters.extend(mem["turn_data"]["actor_override"])
     active_characters.append("Non-Tracked Entity")
     with ui.column():
         with ui.row():  # Actor(s)
