@@ -13,7 +13,7 @@ from functions.basics import dict_to_df
 from functions.groups import groups_gathered_check
 from memory import init_mem, init_table, init_user, set_user_type
 
-coding_priorities = "Character Info Editor"
+coding_priorities = "Combat Dialog, Character Info Sidebar"
 
 
 # pages
@@ -64,9 +64,6 @@ async def main_page():
         left_container()
     with ui.right_drawer(value=False) as right_drawer:
         right_container()
-
-    # main_container() # Refreshable container for main content
-
 
 @ui.refreshable
 def main_container():

@@ -9,6 +9,7 @@ from functions.groups import breakup_group, groups_list, merge_groups, rename_gr
 
 def create_group_content(page: ui.refreshable):
     mem = app.storage.general
+    mem['table_mode'] = "group"
     groups = groups_list(dict_to_df(mem["character_details"]))
 
     def clickable_group(head_page, head_group):

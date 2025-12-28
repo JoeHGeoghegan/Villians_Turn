@@ -46,9 +46,8 @@ def create_content(page: ui.refreshable,sidebar: ui.refreshable):
         character_selector = ui.select(all_characters + ["New Character"],
                                        value=selected_character["character_details"]["name"],
                                        on_change=lambda character_name: select_character(character_name.value)).classes('w-64')
-        # Disable if no other character
-        if len(all_characters) == 0 or all_characters == ["New Character"]: character_selector.disable()
-        else: character_selector.enable()# Normal selector
+
+        character_selector.enable() if (len(all_characters) != 0 and all_characters != ["New Character"]) else character_selector.disable()
 
         # Character Details
         ui.markdown('###Character Editor')
@@ -254,26 +253,38 @@ def add_to_section(section, new_item):
         selected_character[section].extend(new_item)
     refresh_tab(section)
 
-def set_character_data(section, index, key, new_value):
-    if type(new_value) == float:
-        new_value = int(new_value)
-    if type(new_value) == float:
-        new_value = ast.literal_eval(new_value)
+def clean_input(data, parse_type):
+    if parse_type is not None:
+        if parse_type == "string":
+            return data
+        elif parse_type == "int":
+            return int(ast.literal_eval(data))
+        elif parse_type == "bool":
+            return ast.literal_eval(data)
+        else:
+            return data
+    else:
+        if type(data) == str:
+            return int(data)
+        elif type(data) == float:
+            return int(ast.literal_eval(data))
+        else:
+            return data
+
+def set_character_data(section, index, key, new_value, parse_type = None):
+    clean_input(new_value, parse_type)
     global selected_character
     selected_character[section][index][key] = new_value
+
+def set_character_detail(key, new_value, parse_type = None):
+    clean_input(new_value, parse_type)
+    global selected_character
+    selected_character["character_details"][key] = new_value
 
 def remove_character_data(section, index):
     global selected_character
     selected_character[section].pop(index)
     refresh_tab(section)
-
-def set_character_detail(key, new_value):
-    if type(new_value) == str:
-        new_value = int(new_value)
-    if type(new_value) == float:
-        new_value = ast.literal_eval(new_value)
-    global selected_character
-    selected_character["character_details"][key] = new_value
 
 def entry_fields(mem_section, header_list, index=0):
     global selected_character
@@ -299,19 +310,19 @@ def entry_fields(mem_section, header_list, index=0):
         elif entry_type == "int":
             if head_table:
                 ui.number(label=label, value=data_value, on_change=lambda e, h=header:
-                set_character_detail(h, e.value))
+                set_character_detail(h, e.value, "int"))
             else:
                 ui.number(label=label, value=data_value, on_change=lambda e, h=header:
-                set_character_data(mem_section, index, h, e.value))
+                set_character_data(mem_section, index, h, e.value, "int"))
         elif entry_type == "string":
             if length_calc(data_value) > label_length:
                 label_length = length_calc(data_value)
             if head_table:
                 ui.input(label=label, value=data_value, on_change=lambda e, h=header:
-                set_character_detail(h, e.value)).classes(f'w-{label_length}')
+                set_character_detail(h, e.value, "string")).classes(f'w-{label_length}')
             else:
                 ui.input(label=label, value=data_value, on_change=lambda e, h=header:
-                set_character_data(mem_section, index, h, e.value)).classes(f'w-{label_length}')
+                set_character_data(mem_section, index, h, e.value, "string")).classes(f'w-{label_length}')
         elif entry_type == "dice_equation":  # Same as String but with validation. #TODO add validation (Try/Except on dice roll?)
             if head_table:
                 ui.input(label=label, value=data_value, on_change=lambda e, h=header:
@@ -322,10 +333,10 @@ def entry_fields(mem_section, header_list, index=0):
         elif entry_type == "bool":
             if head_table:
                 ui.checkbox(text=label, value=data_value, on_change=lambda e, h=header:
-                set_character_detail(h, e.value))
+                set_character_detail(h, e.value, "bool"))
             else:
                 ui.checkbox(text=label, value=data_value, on_change=lambda e, h=header:
-                set_character_data(mem_section, index, h, e.value))
+                set_character_data(mem_section, index, h, e.value, "bool"))
         elif entry_type == "character_resources":
             if head_table:
                 ui.select(options=[resource["name"] for resource in selected_character["resources"]],

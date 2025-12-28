@@ -1,11 +1,8 @@
-# Library Imports
 import json
-
 import pandas as pd
 from nicegui import app
 
 from functions.basics import df_to_dict
-### Local Imports
 from functions.data import read_audit, read_flavor
 from functions.database import schema_to_dict, load_lists_from_csvs
 

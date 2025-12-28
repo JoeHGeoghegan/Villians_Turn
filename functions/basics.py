@@ -1,6 +1,6 @@
 # Imports
 import pandas as pd
-from nicegui import app
+from nicegui import app, ui
 
 
 def dict_to_df(data:dict):
@@ -50,3 +50,24 @@ def split_column_list(df, column_name, new_axis_names):
                                             index=df_split.index)
     df_split.drop(columns=column_name, inplace=True)
     return df_split
+
+def list_oxford(things_to_string):
+    output = ""
+    length = len(things_to_string)
+    if length == 1:
+        return things_to_string[0]
+    elif length == 2:
+        return f"{things_to_string[0]} and {things_to_string[1]}"
+    else:
+        for index, thing in enumerate(things_to_string):
+            if index == 0:
+                # First value
+                output = f"{thing}"
+            elif index != length - 1:
+                # Action for all other values
+                output += f", {thing}"
+            else:
+                # last value
+                output += f", and {thing}"
+
+    return output

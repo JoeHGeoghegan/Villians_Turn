@@ -76,6 +76,7 @@ def turn_track_ui_list_row_click_handler(name, if_turn, op_mode):
     else:
         operation = op_mode
     print(f"Handling {operation} type operation for {name}. Turn: {if_turn}")
+    #TODO Idea - Combine actor/target into alternative operation. A click to select, a click to place
     if operation == 'actor':
         list_actor = list(mem["turn_data"]["actor"])
         list_actor_override = list(mem["turn_data"]["actor_override"])
@@ -89,14 +90,14 @@ def turn_track_ui_list_row_click_handler(name, if_turn, op_mode):
         else:
             ui.notify(f"{name} is already selected as actor")
         refresh()
-    elif operation == "remove_actor":
-        list_actor = list(mem["turn_data"]["actor"])
-        if name in list_actor:
-            list_actor.remove(name)
-            mem["turn_data"]["actor"] = list_actor
-        else:
-            ui.notify(f"{name} wasn't in the actor select...huh, someone found a bug..")
-        refresh()
+    # elif operation == "remove_actor":
+    #     list_actor = list(mem["turn_data"]["actor"])
+    #     if name in list_actor:
+    #         list_actor.remove(name)
+    #         mem["turn_data"]["actor"] = list_actor
+    #     else:
+    #         ui.notify(f"{name} wasn't in the actor select...huh, someone found a bug..")
+    #     refresh()
     elif operation == 'target':
         list_target = list(mem["turn_data"]["target"])
         if not (name in list_target):
@@ -105,14 +106,14 @@ def turn_track_ui_list_row_click_handler(name, if_turn, op_mode):
         else:
             ui.notify(f"{name} is already selected as target")
         refresh()
-    elif operation == "remove_target":
-        list_target = list(mem["turn_data"]["target"])
-        if name in list_target:
-            list_target.remove(name)
-            mem["turn_data"]["target"] = list_target
-        else:
-            ui.notify(f"{name} wasn't in the target select...huh")
-        refresh()
+    # elif operation == "remove_target":
+    #     list_target = list(mem["turn_data"]["target"])
+    #     if name in list_target:
+    #         list_target.remove(name)
+    #         mem["turn_data"]["target"] = list_target
+    #     else:
+    #         ui.notify(f"{name} wasn't in the target select...huh")
+    #     refresh()
     elif operation == 'group':
         turn_table_character_group_click_dialog(main_container,name)
     elif operation == 'info':

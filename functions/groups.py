@@ -1,7 +1,9 @@
 # Imports
 import numpy as np
 import pandas as pd
+from nicegui import app
 
+from functions.basics import dict_to_df
 from functions.game import roll_dice
 
 
@@ -30,6 +32,13 @@ def multi_person_groups_list(characters):
     multi_person_groups_mask = [len(characters[characters['group'] == x]) != 1 for x in characters['group'].unique()]
     multi_person_groups = characters['group'].unique()[multi_person_groups_mask]
     return multi_person_groups
+
+
+def player_characters_groups():
+    #TODO Create Character->Player table, use user["id"] to filter down to Player Characters and
+    # their groups (list of dicts {character,group})
+    # THIS IS NOT A PRIORITY DON'T WORK ON THIS DUDE!!!
+    return groups_list(dict_to_df(app.storage.general["character_details"]))
 
 
 # Full table modifications
