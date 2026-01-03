@@ -1,0 +1,1945 @@
+{
+  "character_details": [
+    {
+      "name": "P1",
+      "team": "T1",
+      "group": "G1",
+      "level": 1,
+      "xp": 0,
+      "class": "None",
+      "background": "None",
+      "ancestry": "None",
+      "armor_class": 10,
+      "initiative": 1,
+      "initiative_bonus": 0,
+      "strength": 10,
+      "dexterity": 10,
+      "constitution": 10,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 10
+    },
+    {
+      "name": "P2",
+      "team": "T1",
+      "group": "G1",
+      "level": 1,
+      "xp": 0,
+      "class": "None",
+      "background": "None",
+      "ancestry": "None",
+      "armor_class": 10,
+      "initiative": 1,
+      "initiative_bonus": 0,
+      "strength": 10,
+      "dexterity": 10,
+      "constitution": 10,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 10
+    },
+    {
+      "name": "P3",
+      "team": "T1",
+      "group": "G1",
+      "level": 1,
+      "xp": 0,
+      "class": "None",
+      "background": "None",
+      "ancestry": "None",
+      "armor_class": 10,
+      "initiative": 1,
+      "initiative_bonus": 0,
+      "strength": 10,
+      "dexterity": 10,
+      "constitution": 10,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 10
+    },
+    {
+      "name": "P4",
+      "team": "T2",
+      "group": "G2",
+      "level": 1,
+      "xp": 0,
+      "class": "None",
+      "background": "None",
+      "ancestry": "None",
+      "armor_class": 10,
+      "initiative": 1,
+      "initiative_bonus": 0,
+      "strength": 10,
+      "dexterity": 10,
+      "constitution": 10,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 10
+    },
+    {
+      "name": "P5",
+      "team": "T2",
+      "group": "G2",
+      "level": 1,
+      "xp": 0,
+      "class": "None",
+      "background": "None",
+      "ancestry": "None",
+      "armor_class": 10,
+      "initiative": 1,
+      "initiative_bonus": 0,
+      "strength": 10,
+      "dexterity": 10,
+      "constitution": 10,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 10
+    },
+    {
+      "name": "P6",
+      "team": "T1",
+      "group": "G3",
+      "level": 1,
+      "xp": 0,
+      "class": "None",
+      "background": "None",
+      "ancestry": "None",
+      "armor_class": 10,
+      "initiative": 1,
+      "initiative_bonus": 0,
+      "strength": 10,
+      "dexterity": 10,
+      "constitution": 10,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 10
+    },
+    {
+      "name": "P7",
+      "team": "T2",
+      "group": "G4",
+      "level": 1,
+      "xp": 0,
+      "class": "None",
+      "background": "None",
+      "ancestry": "None",
+      "armor_class": 10,
+      "initiative": 1,
+      "initiative_bonus": 0,
+      "strength": 10,
+      "dexterity": 10,
+      "constitution": 10,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 10
+    }
+  ],
+  "conditions": [
+    {
+      "character_name": "P1",
+      "name": null
+    },
+    {
+      "character_name": "P2",
+      "name": null
+    },
+    {
+      "character_name": "P3",
+      "name": null
+    },
+    {
+      "character_name": "P4",
+      "name": null
+    },
+    {
+      "character_name": "P5",
+      "name": null
+    },
+    {
+      "character_name": "P6",
+      "name": null
+    },
+    {
+      "character_name": "P7",
+      "name": null
+    }
+  ],
+  "feats": [
+    {
+      "character_name": "P1",
+      "name": null
+    },
+    {
+      "character_name": "P2",
+      "name": null
+    },
+    {
+      "character_name": "P3",
+      "name": null
+    },
+    {
+      "character_name": "P4",
+      "name": null
+    },
+    {
+      "character_name": "P5",
+      "name": null
+    },
+    {
+      "character_name": "P6",
+      "name": null
+    },
+    {
+      "character_name": "P7",
+      "name": null
+    }
+  ],
+  "features": [
+    {
+      "character_name": "P1",
+      "name": null
+    },
+    {
+      "character_name": "P2",
+      "name": null
+    },
+    {
+      "character_name": "P3",
+      "name": null
+    },
+    {
+      "character_name": "P4",
+      "name": null
+    },
+    {
+      "character_name": "P5",
+      "name": null
+    },
+    {
+      "character_name": "P6",
+      "name": null
+    },
+    {
+      "character_name": "P7",
+      "name": null
+    }
+  ],
+  "inventory": [
+    {
+      "character_name": "P1",
+      "name": null,
+      "weight": null
+    },
+    {
+      "character_name": "P2",
+      "name": null,
+      "weight": null
+    },
+    {
+      "character_name": "P3",
+      "name": null,
+      "weight": null
+    },
+    {
+      "character_name": "P4",
+      "name": null,
+      "weight": null
+    },
+    {
+      "character_name": "P5",
+      "name": null,
+      "weight": null
+    },
+    {
+      "character_name": "P6",
+      "name": null,
+      "weight": null
+    },
+    {
+      "character_name": "P7",
+      "name": null,
+      "weight": null
+    }
+  ],
+  "resource_override": [
+    {
+      "character_name": "P1",
+      "resource_name": null,
+      "override_type": null,
+      "override_resource_type": null,
+      "override_resource_type_trigger_time": null,
+      "override_resource_use_type": null,
+      "override_current": null,
+      "override_max": null,
+      "override_min": null,
+      "override_proficiency": null,
+      "override_attribute": null
+    },
+    {
+      "character_name": "P2",
+      "resource_name": null,
+      "override_type": null,
+      "override_resource_type": null,
+      "override_resource_type_trigger_time": null,
+      "override_resource_use_type": null,
+      "override_current": null,
+      "override_max": null,
+      "override_min": null,
+      "override_proficiency": null,
+      "override_attribute": null
+    },
+    {
+      "character_name": "P3",
+      "resource_name": null,
+      "override_type": null,
+      "override_resource_type": null,
+      "override_resource_type_trigger_time": null,
+      "override_resource_use_type": null,
+      "override_current": null,
+      "override_max": null,
+      "override_min": null,
+      "override_proficiency": null,
+      "override_attribute": null
+    },
+    {
+      "character_name": "P4",
+      "resource_name": null,
+      "override_type": null,
+      "override_resource_type": null,
+      "override_resource_type_trigger_time": null,
+      "override_resource_use_type": null,
+      "override_current": null,
+      "override_max": null,
+      "override_min": null,
+      "override_proficiency": null,
+      "override_attribute": null
+    },
+    {
+      "character_name": "P5",
+      "resource_name": null,
+      "override_type": null,
+      "override_resource_type": null,
+      "override_resource_type_trigger_time": null,
+      "override_resource_use_type": null,
+      "override_current": null,
+      "override_max": null,
+      "override_min": null,
+      "override_proficiency": null,
+      "override_attribute": null
+    },
+    {
+      "character_name": "P6",
+      "resource_name": null,
+      "override_type": null,
+      "override_resource_type": null,
+      "override_resource_type_trigger_time": null,
+      "override_resource_use_type": null,
+      "override_current": null,
+      "override_max": null,
+      "override_min": null,
+      "override_proficiency": null,
+      "override_attribute": null
+    },
+    {
+      "character_name": "P7",
+      "resource_name": null,
+      "override_type": null,
+      "override_resource_type": null,
+      "override_resource_type_trigger_time": null,
+      "override_resource_use_type": null,
+      "override_current": null,
+      "override_max": null,
+      "override_min": null,
+      "override_proficiency": null,
+      "override_attribute": null
+    }
+  ],
+  "resources": [
+    {
+      "character_name": "P1",
+      "name": "Actions",
+      "resource_type": "reset_max",
+      "resource_type_trigger_time": "turn",
+      "resource_use_type": "game_managed",
+      "current": 3,
+      "max": 3,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P1",
+      "name": "Movement",
+      "resource_type": "reset_max",
+      "resource_type_trigger_time": "turn",
+      "resource_use_type": "decrement_by_number",
+      "current": 30,
+      "max": 30,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P1",
+      "name": "Current HP",
+      "resource_type": "reset_max",
+      "resource_type_trigger_time": "long_rest",
+      "resource_use_type": "game_managed",
+      "current": 8,
+      "max": 8,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P1",
+      "name": "Dying",
+      "resource_type": "reset_min",
+      "resource_type_trigger_time": "any_rest",
+      "resource_use_type": "increment_by_1",
+      "current": 0,
+      "max": 4,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P1",
+      "name": "Inspiration",
+      "resource_type": "reset_min",
+      "resource_type_trigger_time": "any_rest",
+      "resource_use_type": "decrement_by_1",
+      "current": 0,
+      "max": 9999,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P2",
+      "name": "Actions",
+      "resource_type": "reset_max",
+      "resource_type_trigger_time": "turn",
+      "resource_use_type": "game_managed",
+      "current": 3,
+      "max": 3,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P2",
+      "name": "Movement",
+      "resource_type": "reset_max",
+      "resource_type_trigger_time": "turn",
+      "resource_use_type": "decrement_by_number",
+      "current": 30,
+      "max": 30,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P2",
+      "name": "Current HP",
+      "resource_type": "reset_max",
+      "resource_type_trigger_time": "long_rest",
+      "resource_use_type": "game_managed",
+      "current": 8,
+      "max": 8,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P2",
+      "name": "Dying",
+      "resource_type": "reset_min",
+      "resource_type_trigger_time": "any_rest",
+      "resource_use_type": "increment_by_1",
+      "current": 0,
+      "max": 4,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P2",
+      "name": "Inspiration",
+      "resource_type": "reset_min",
+      "resource_type_trigger_time": "any_rest",
+      "resource_use_type": "decrement_by_1",
+      "current": 0,
+      "max": 9999,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P3",
+      "name": "Actions",
+      "resource_type": "reset_max",
+      "resource_type_trigger_time": "turn",
+      "resource_use_type": "game_managed",
+      "current": 3,
+      "max": 3,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P3",
+      "name": "Movement",
+      "resource_type": "reset_max",
+      "resource_type_trigger_time": "turn",
+      "resource_use_type": "decrement_by_number",
+      "current": 30,
+      "max": 30,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P3",
+      "name": "Current HP",
+      "resource_type": "reset_max",
+      "resource_type_trigger_time": "long_rest",
+      "resource_use_type": "game_managed",
+      "current": 8,
+      "max": 8,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P3",
+      "name": "Dying",
+      "resource_type": "reset_min",
+      "resource_type_trigger_time": "any_rest",
+      "resource_use_type": "increment_by_1",
+      "current": 0,
+      "max": 4,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P3",
+      "name": "Inspiration",
+      "resource_type": "reset_min",
+      "resource_type_trigger_time": "any_rest",
+      "resource_use_type": "decrement_by_1",
+      "current": 0,
+      "max": 9999,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P4",
+      "name": "Actions",
+      "resource_type": "reset_max",
+      "resource_type_trigger_time": "turn",
+      "resource_use_type": "game_managed",
+      "current": 3,
+      "max": 3,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P4",
+      "name": "Movement",
+      "resource_type": "reset_max",
+      "resource_type_trigger_time": "turn",
+      "resource_use_type": "decrement_by_number",
+      "current": 30,
+      "max": 30,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P4",
+      "name": "Current HP",
+      "resource_type": "reset_max",
+      "resource_type_trigger_time": "long_rest",
+      "resource_use_type": "game_managed",
+      "current": 8,
+      "max": 8,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P4",
+      "name": "Dying",
+      "resource_type": "reset_min",
+      "resource_type_trigger_time": "any_rest",
+      "resource_use_type": "increment_by_1",
+      "current": 0,
+      "max": 4,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P4",
+      "name": "Inspiration",
+      "resource_type": "reset_min",
+      "resource_type_trigger_time": "any_rest",
+      "resource_use_type": "decrement_by_1",
+      "current": 0,
+      "max": 9999,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P5",
+      "name": "Actions",
+      "resource_type": "reset_max",
+      "resource_type_trigger_time": "turn",
+      "resource_use_type": "game_managed",
+      "current": 3,
+      "max": 3,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P5",
+      "name": "Movement",
+      "resource_type": "reset_max",
+      "resource_type_trigger_time": "turn",
+      "resource_use_type": "decrement_by_number",
+      "current": 30,
+      "max": 30,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P5",
+      "name": "Current HP",
+      "resource_type": "reset_max",
+      "resource_type_trigger_time": "long_rest",
+      "resource_use_type": "game_managed",
+      "current": 8,
+      "max": 8,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P5",
+      "name": "Dying",
+      "resource_type": "reset_min",
+      "resource_type_trigger_time": "any_rest",
+      "resource_use_type": "increment_by_1",
+      "current": 0,
+      "max": 4,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P5",
+      "name": "Inspiration",
+      "resource_type": "reset_min",
+      "resource_type_trigger_time": "any_rest",
+      "resource_use_type": "decrement_by_1",
+      "current": 0,
+      "max": 9999,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P6",
+      "name": "Actions",
+      "resource_type": "reset_max",
+      "resource_type_trigger_time": "turn",
+      "resource_use_type": "game_managed",
+      "current": 3,
+      "max": 3,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P6",
+      "name": "Movement",
+      "resource_type": "reset_max",
+      "resource_type_trigger_time": "turn",
+      "resource_use_type": "decrement_by_number",
+      "current": 30,
+      "max": 30,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P6",
+      "name": "Current HP",
+      "resource_type": "reset_max",
+      "resource_type_trigger_time": "long_rest",
+      "resource_use_type": "game_managed",
+      "current": 8,
+      "max": 8,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P6",
+      "name": "Dying",
+      "resource_type": "reset_min",
+      "resource_type_trigger_time": "any_rest",
+      "resource_use_type": "increment_by_1",
+      "current": 0,
+      "max": 4,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P6",
+      "name": "Inspiration",
+      "resource_type": "reset_min",
+      "resource_type_trigger_time": "any_rest",
+      "resource_use_type": "decrement_by_1",
+      "current": 0,
+      "max": 9999,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P7",
+      "name": "Actions",
+      "resource_type": "reset_max",
+      "resource_type_trigger_time": "turn",
+      "resource_use_type": "game_managed",
+      "current": 3,
+      "max": 3,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P7",
+      "name": "Movement",
+      "resource_type": "reset_max",
+      "resource_type_trigger_time": "turn",
+      "resource_use_type": "decrement_by_number",
+      "current": 30,
+      "max": 30,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P7",
+      "name": "Current HP",
+      "resource_type": "reset_max",
+      "resource_type_trigger_time": "long_rest",
+      "resource_use_type": "game_managed",
+      "current": 8,
+      "max": 8,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P7",
+      "name": "Dying",
+      "resource_type": "reset_min",
+      "resource_type_trigger_time": "any_rest",
+      "resource_use_type": "increment_by_1",
+      "current": 0,
+      "max": 4,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    },
+    {
+      "character_name": "P7",
+      "name": "Inspiration",
+      "resource_type": "reset_min",
+      "resource_type_trigger_time": "any_rest",
+      "resource_use_type": "decrement_by_1",
+      "current": 0,
+      "max": 9999,
+      "min": 0,
+      "proficiency": false,
+      "attribute": "none"
+    }
+  ],
+  "skills": [
+    {
+      "character_name": "P1",
+      "name": "Acrobatics",
+      "attribute": "Dexterity",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P1",
+      "name": "Animal Handling",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P1",
+      "name": "Arcana",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P1",
+      "name": "Athletics",
+      "attribute": "Strength",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P1",
+      "name": "Crafting",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P1",
+      "name": "Deception",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P1",
+      "name": "Diplomacy",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P1",
+      "name": "History",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P1",
+      "name": "Insight",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P1",
+      "name": "Intimidation",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P1",
+      "name": "Investigation",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P1",
+      "name": "Medicine",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P1",
+      "name": "Nature",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P1",
+      "name": "Occultism",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P1",
+      "name": "Perception",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P1",
+      "name": "Performance",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P1",
+      "name": "Persuasion",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P1",
+      "name": "Religion",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P1",
+      "name": "Society",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P1",
+      "name": "Stealth",
+      "attribute": "Dexterity",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P1",
+      "name": "Survival",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P1",
+      "name": "Thievery",
+      "attribute": "Dexterity",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P2",
+      "name": "Acrobatics",
+      "attribute": "Dexterity",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P2",
+      "name": "Animal Handling",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P2",
+      "name": "Arcana",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P2",
+      "name": "Athletics",
+      "attribute": "Strength",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P2",
+      "name": "Crafting",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P2",
+      "name": "Deception",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P2",
+      "name": "Diplomacy",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P2",
+      "name": "History",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P2",
+      "name": "Insight",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P2",
+      "name": "Intimidation",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P2",
+      "name": "Investigation",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P2",
+      "name": "Medicine",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P2",
+      "name": "Nature",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P2",
+      "name": "Occultism",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P2",
+      "name": "Perception",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P2",
+      "name": "Performance",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P2",
+      "name": "Persuasion",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P2",
+      "name": "Religion",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P2",
+      "name": "Society",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P2",
+      "name": "Stealth",
+      "attribute": "Dexterity",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P2",
+      "name": "Survival",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P2",
+      "name": "Thievery",
+      "attribute": "Dexterity",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P3",
+      "name": "Acrobatics",
+      "attribute": "Dexterity",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P3",
+      "name": "Animal Handling",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P3",
+      "name": "Arcana",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P3",
+      "name": "Athletics",
+      "attribute": "Strength",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P3",
+      "name": "Crafting",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P3",
+      "name": "Deception",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P3",
+      "name": "Diplomacy",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P3",
+      "name": "History",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P3",
+      "name": "Insight",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P3",
+      "name": "Intimidation",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P3",
+      "name": "Investigation",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P3",
+      "name": "Medicine",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P3",
+      "name": "Nature",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P3",
+      "name": "Occultism",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P3",
+      "name": "Perception",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P3",
+      "name": "Performance",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P3",
+      "name": "Persuasion",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P3",
+      "name": "Religion",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P3",
+      "name": "Society",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P3",
+      "name": "Stealth",
+      "attribute": "Dexterity",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P3",
+      "name": "Survival",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P3",
+      "name": "Thievery",
+      "attribute": "Dexterity",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P4",
+      "name": "Acrobatics",
+      "attribute": "Dexterity",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P4",
+      "name": "Animal Handling",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P4",
+      "name": "Arcana",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P4",
+      "name": "Athletics",
+      "attribute": "Strength",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P4",
+      "name": "Crafting",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P4",
+      "name": "Deception",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P4",
+      "name": "Diplomacy",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P4",
+      "name": "History",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P4",
+      "name": "Insight",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P4",
+      "name": "Intimidation",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P4",
+      "name": "Investigation",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P4",
+      "name": "Medicine",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P4",
+      "name": "Nature",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P4",
+      "name": "Occultism",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P4",
+      "name": "Perception",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P4",
+      "name": "Performance",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P4",
+      "name": "Persuasion",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P4",
+      "name": "Religion",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P4",
+      "name": "Society",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P4",
+      "name": "Stealth",
+      "attribute": "Dexterity",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P4",
+      "name": "Survival",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P4",
+      "name": "Thievery",
+      "attribute": "Dexterity",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P5",
+      "name": "Acrobatics",
+      "attribute": "Dexterity",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P5",
+      "name": "Animal Handling",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P5",
+      "name": "Arcana",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P5",
+      "name": "Athletics",
+      "attribute": "Strength",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P5",
+      "name": "Crafting",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P5",
+      "name": "Deception",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P5",
+      "name": "Diplomacy",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P5",
+      "name": "History",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P5",
+      "name": "Insight",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P5",
+      "name": "Intimidation",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P5",
+      "name": "Investigation",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P5",
+      "name": "Medicine",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P5",
+      "name": "Nature",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P5",
+      "name": "Occultism",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P5",
+      "name": "Perception",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P5",
+      "name": "Performance",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P5",
+      "name": "Persuasion",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P5",
+      "name": "Religion",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P5",
+      "name": "Society",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P5",
+      "name": "Stealth",
+      "attribute": "Dexterity",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P5",
+      "name": "Survival",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P5",
+      "name": "Thievery",
+      "attribute": "Dexterity",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P6",
+      "name": "Acrobatics",
+      "attribute": "Dexterity",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P6",
+      "name": "Animal Handling",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P6",
+      "name": "Arcana",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P6",
+      "name": "Athletics",
+      "attribute": "Strength",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P6",
+      "name": "Crafting",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P6",
+      "name": "Deception",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P6",
+      "name": "Diplomacy",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P6",
+      "name": "History",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P6",
+      "name": "Insight",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P6",
+      "name": "Intimidation",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P6",
+      "name": "Investigation",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P6",
+      "name": "Medicine",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P6",
+      "name": "Nature",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P6",
+      "name": "Occultism",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P6",
+      "name": "Perception",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P6",
+      "name": "Performance",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P6",
+      "name": "Persuasion",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P6",
+      "name": "Religion",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P6",
+      "name": "Society",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P6",
+      "name": "Stealth",
+      "attribute": "Dexterity",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P6",
+      "name": "Survival",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P6",
+      "name": "Thievery",
+      "attribute": "Dexterity",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P7",
+      "name": "Acrobatics",
+      "attribute": "Dexterity",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P7",
+      "name": "Animal Handling",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P7",
+      "name": "Arcana",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P7",
+      "name": "Athletics",
+      "attribute": "Strength",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P7",
+      "name": "Crafting",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P7",
+      "name": "Deception",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P7",
+      "name": "Diplomacy",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P7",
+      "name": "History",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P7",
+      "name": "Insight",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P7",
+      "name": "Intimidation",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P7",
+      "name": "Investigation",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P7",
+      "name": "Medicine",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P7",
+      "name": "Nature",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P7",
+      "name": "Occultism",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P7",
+      "name": "Perception",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P7",
+      "name": "Performance",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P7",
+      "name": "Persuasion",
+      "attribute": "Charisma",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P7",
+      "name": "Religion",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P7",
+      "name": "Society",
+      "attribute": "Intelligence",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P7",
+      "name": "Stealth",
+      "attribute": "Dexterity",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P7",
+      "name": "Survival",
+      "attribute": "Wisdom",
+      "proficient": false,
+      "expertise": "Untrained"
+    },
+    {
+      "character_name": "P7",
+      "name": "Thievery",
+      "attribute": "Dexterity",
+      "proficient": false,
+      "expertise": "Untrained"
+    }
+  ],
+  "weapons": [
+    {
+      "character_name": "P1",
+      "name": "Fine Dagger",
+      "action_cost": 1.0,
+      "range": 5,
+      "damage_dice": "1d4+1",
+      "attack_mod": "0",
+      "attribute": "strength",
+      "proficiency": "true",
+      "weight": null,
+      "traits": ""
+    },
+    {
+      "character_name": "P2",
+      "name": "Fine Dagger",
+      "action_cost": 1.0,
+      "range": 5,
+      "damage_dice": "1d4+1",
+      "attack_mod": "0",
+      "attribute": "strength",
+      "proficiency": "true",
+      "weight": null,
+      "traits": ""
+    },
+    {
+      "character_name": "P3",
+      "name": "Fine Dagger",
+      "action_cost": 1.0,
+      "range": 5,
+      "damage_dice": "1d4+1",
+      "attack_mod": "0",
+      "attribute": "strength",
+      "proficiency": "true",
+      "weight": null,
+      "traits": ""
+    },
+    {
+      "character_name": "P4",
+      "name": "Fine Dagger",
+      "action_cost": 1.0,
+      "range": 5,
+      "damage_dice": "1d4+1",
+      "attack_mod": "0",
+      "attribute": "strength",
+      "proficiency": "true",
+      "weight": null,
+      "traits": ""
+    },
+    {
+      "character_name": "P5",
+      "name": "Fine Dagger",
+      "action_cost": 1.0,
+      "range": 5,
+      "damage_dice": "1d4+1",
+      "attack_mod": "0",
+      "attribute": "strength",
+      "proficiency": "true",
+      "weight": null,
+      "traits": ""
+    },
+    {
+      "character_name": "P6",
+      "name": "Fine Dagger",
+      "action_cost": 1.0,
+      "range": 5,
+      "damage_dice": "1d4+1",
+      "attack_mod": "0",
+      "attribute": "strength",
+      "proficiency": "true",
+      "weight": null,
+      "traits": ""
+    },
+    {
+      "character_name": "P7",
+      "name": "Fine Dagger",
+      "action_cost": 1.0,
+      "range": 5,
+      "damage_dice": "1d4+1",
+      "attack_mod": "0",
+      "attribute": "strength",
+      "proficiency": "true",
+      "weight": null,
+      "traits": ""
+    }
+  ]
+}

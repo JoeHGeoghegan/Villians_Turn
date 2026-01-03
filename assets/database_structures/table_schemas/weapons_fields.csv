@@ -1,4 +1,4 @@
-character_name,name,action_cost,range,damage_dice,attribute,proficiency,weight,traits
-character_name,Name,Action Cost,Range,Damage Dice,Attribute,Proficiency,Weight,Traits
-character_name,string,int,int,dice_equation,attribute,bool,int,string
-character_name,Fine Dagger,1,5,1d4+1,strength,true,0,
+character_name,name,action_cost,range,damage_dice,attack_mod,attribute,proficiency,weight,traits
+character_name,Name,Action Cost,Range,Damage Dice,Attack Modifier,Attribute,Proficiency,Weight,Traits
+character_name,string,int,int,dice_equation,dice_equation,attribute,bool,int,string
+character_name,Fine Dagger,1,5,1d4+1,0,strength,true,,

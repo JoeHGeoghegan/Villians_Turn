@@ -23,32 +23,26 @@ def create_content(page: ui.refreshable):
     ui.button("Start creating characters!", on_click=lambda: create_characters(page))
 
     with ui.row():
-        # col1 = ui.column()
-        # col2 = ui.column()
-        # with col1:
-        #     ui.upload(
-        #         on_upload=lambda file: import_file(page, file),
-        #         label="Click or Drag to Upload CSV File"
-        #     ).props('accept=.csv')
-        #     ui.button("Download Template CSV",
-        #               on_click=lambda: ui.download('assets/party_data/VilliansTurnTemplate.csv'))
-        # with col2:
-        #     ui.button("Or use test data version Generic",
-        #               on_click=lambda: example_import(page, 'assets/party_data/CombatExample1.csv'))
-        #     ui.button("Or use test data version LOTR",
-        #               on_click=lambda: example_import(page, 'assets/party_data/Party1.csv'))
-        #     ui.button("Or use test data version GOT",
-        #               on_click=lambda: example_import(page, 'assets/party_data/Party2.csv'))
+        col1 = ui.column()
+        col2 = ui.column()
+        with col1:
+            ui.upload(
+                on_upload=lambda file: import_file(page, file),
+                label="Or Click/Drag to Upload a Villain's Turn JSON Export File"
+            ).props('accept=.json')
+        with col2:
+            ui.button("Or use test data - Version: Generic",
+                      on_click=lambda: import_file(page, 'assets/example_imports/CombatExample1_Generic.json'))
         with open("assets/texts/csv_details.md", 'r') as md_file:
             ui.markdown(md_file.read())
 
 
-def example_import(page: ui.refreshable, path_root, import_groups=True):
+def example_import(page: ui.refreshable, path_root):#TODO Currently unused. Remove
     for root, _, files in os.walk(path_root):
         for file_name in files:
             full_path = os.path.join(root, file_name)
             relative_path = os.path.relpath(full_path, path_root)
-            import_file(page, relative_path, file_name, import_groups)
+            import_file(page, relative_path)
 
 
 def create_group_gather(page: ui.refreshable,sidebar_page: ui.refreshable):

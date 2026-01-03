@@ -1,7 +1,6 @@
-Action,Main Action,Attacks,Grapples,Shoves,Casts spell,Dashes,Disengages,Dodges,Escapes,Helps,Uses Object,Uses shield,Hides,Readies/Holds Action,Uses class feature
-Action,Bonus Action,Offhand Attacks,Casts spell,Uses class feature
+Action,Action,Attacks,Casts spell,Disrupts,Grapples,Shoves,Dashes,Disengages,Dodges,Escapes,Helps,Uses Object,Uses shield,Hides,Readies/Holds Action,Uses class feature
 Action,Reaction,Opportunity attacks,Uses Readied action,Casts a spell
-Action,Movement,Moves,Holds Turn,Holds Turn with Intent to Disrupt,Climbs,Swims,Drops prone,Crawls,Stands up,High jumps,Long jumps,Moves Across Difficult terrain,Moves while Grappling
+Action,Movement,Moves,Holds Turn,Climbs,Swims,Drops prone,Crawls,Stands up,High jumps,Long jumps,Moves Across Difficult terrain,Moves while Grappling
 Out,Outcome,Succeeds/Hits,Fails/Misses,Hits Critical
 Out,Results,Dealing Damage,Dealing Partial Damage,Healing,Disruption,Self Healing,Hurting Self,Buffing,Debuffing,Inflicting Condition,Something Else Happened,Moves Self,Target Moves
 Tags,Type,Slashing,Bludgeoning,Piercing,Force,Fire,Cold,Lightning,Thunder,Necrotic,Acid,Poison,Radiant,Psychic

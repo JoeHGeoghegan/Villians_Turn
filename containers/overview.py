@@ -34,7 +34,7 @@ def create_content(page: ui.refreshable,sidebar: ui.refreshable):
                 ui_action_number = ui.label(f"Action #: {mem['action_number']}").classes('text-xl')
                 ui.select({
                     'actor': 'Add to Actor(s)',
-                    'target': 'Add to Target(s)',
+                    # 'target': 'Add to Target(s)',
                     'group': 'Select for Grouping',
                     'info': 'More Info Only',
                 }, value=mem["table_mode"], label="On Click Action",

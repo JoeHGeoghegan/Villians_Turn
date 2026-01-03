@@ -13,11 +13,18 @@ def schema_to_dict(path):
         data = []
         for row in schema:
             data.append(row)
+    print(path)
+    for key, value in data[2].items():
+        if data[1][key] == 'int':
+            if value is not None and value != '':
+                data[2][key] = ast.literal_eval(data[2][key])
+            else:
+                data[2][key] = None
     return {
         "headers": list(data[0].keys()),
         "labels": data[0],
         "types": data[1],
-        "defaults": ast.literal_eval(data[2])
+        "defaults": data[2]
     }
 
 

@@ -83,6 +83,17 @@ def roll_dice(equation, show_details=False, show_range=False):
 
     return details
 
+def validate_die_roll(dice_equation):
+    valid_chars_pattern = re.compile(r"^[0-9dD\s+\-*/]+$")
+    if not valid_chars_pattern.fullmatch(dice_equation):
+        return False # Invalid characters detected.
+    if re.search(r"[+\-*/\s]{2,}", dice_equation) or re.search(r"d{2,}", dice_equation):
+        return False # Invalid sequence of operators or 'd' characters.
+    # Check for operators at the start or end, unless it's a negative sign at the start
+    if re.search(r"^[+*/]", dice_equation.strip()) or re.search(r"[+\-*/]$", dice_equation.strip()):
+        return False # Equation cannot start or end with an operator (except a leading '-').
+
+    return True # Equation format is valid.
 
 def peak_turn(df: pd.DataFrame, current_turn, direction):
     # df.reset_index(drop=True,inplace=True)

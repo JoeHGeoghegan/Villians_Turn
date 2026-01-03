@@ -1,10 +1,10 @@
-﻿Dealing Damage, target, -, Damage
-Dealing Partial Damage, target, -, Damage
-Healing, target, +, Health
-Disruption, target_group, disrupt, Disrupted
-Self Healing, self, +, Health
-Hurting Self, self, -, Damage
-Buffing, target, attribute, Applied
-Debuffing, target, attribute, Applied
-Inflicting Condition, target, condition, Applied
-Something Else Happened, target, info, What Happened
+﻿Dealing Damage,target,-,Damage
+Dealing Partial Damage,target,-,Damage
+Healing,target,+,Health
+Disruption,target_group,disrupt,Disrupt
+Self Healing,self,+,Health
+Hurting Self,self,-,Damage
+Buffing,target,attribute,Applied
+Debuffing,target,attribute,Applied
+Inflicting Condition,target,condition,Applied
+Something Else Happened,target,info,What Happened

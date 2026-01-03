@@ -19,27 +19,27 @@ def df_max_lengths_in_cols(df):
     return {col: df[col].astype(str).str.len().max() for col in df.columns}
 
 
-def import_file(refresh_target: ui.refreshable, file_path, database_target, import_groups=True):
+def import_file(refresh_target: ui.refreshable, file_path):
     mem = app.storage.general
-    data = pd.read_csv(file_path)
-    if not import_groups and 'group' in data.columns:
-        data['group'] = ''
-    mem[database_target] = df_to_dict(data)
+    with open(file_path, 'r') as f:
+        data_dict = json.load(f)
+    for key, value in data_dict.items():
+        mem[key] = value
     refresh_target.refresh()
 
 def export_character_data():
     mem = app.storage.general
-    data_list = [
-        mem['character_details'],
-        mem['conditions'],
-        mem['feats'],
-        mem['features'],
-        mem['inventory'],
-        mem['resource_override'],
-        mem['resources'],
-        mem['skills'],
-        mem['weapons']
-    ]
+    data_list = {
+        'character_details': mem['character_details'],
+        'conditions': mem['conditions'],
+        'feats': mem['feats'],
+        'features': mem['features'],
+        'inventory': mem['inventory'],
+        'resource_override': mem['resource_override'],
+        'resources': mem['resources'],
+        'skills': mem['skills'],
+        'weapons': mem['weapons']
+    }
 
     now = datetime.now()
     formatted_time = now.strftime("%Y-%m-%d_%H:%M:%S")

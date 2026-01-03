@@ -1,6 +1,7 @@
 # Library Imports
 import ast
 import math
+from pydoc import render_doc
 
 import pandas as pd
 from nicegui import ui, app
@@ -253,12 +254,17 @@ def add_to_section(section, new_item):
         selected_character[section].extend(new_item)
     refresh_tab(section)
 
-def clean_input(data, parse_type):
+def clean_input(data:str, parse_type):
+    if data is None:
+        return None
     if parse_type is not None:
         if parse_type == "string":
             return data
         elif parse_type == "int":
-            return int(ast.literal_eval(data))
+            if type(data) != int and type(data) != float:
+                return int(ast.literal_eval(data.strip()))
+            else:
+                return int(data)
         elif parse_type == "bool":
             return ast.literal_eval(data)
         else:
@@ -294,17 +300,22 @@ def entry_fields(mem_section, header_list, index=0):
         return math.floor(5+len(value)*2.5)
     for header in header_list:
         label = mem["schemas"][mem_section]["labels"][header]  # only need the specific label and type
-        label_length = length_calc(label)
         entry_type = mem["schemas"][mem_section]["types"][header]
         if head_table:
             data_value = selected_character[mem_section][header]
         else:
             data_value = selected_character[mem_section][index][header]
+        label_length = length_calc(label)
+        if entry_type != "int" and entry_type != "bool" and data_value is not None:
+            data_length = length_calc(data_value)
+            render_length = label_length if label_length > data_length else data_length
+        else:
+            render_length = label_length
         # clean data_value
         if type(data_value) == Series:
             data_value = data_value.iloc[0]
         if entry_type == "character_name" and head_table:
-            ui.input(label=label, value=data_value, on_change=lambda e: rename_character(e.value)).classes(f'w-{label_length}')
+            ui.input(label=label, value=data_value, on_change=lambda e: rename_character(e.value)).classes(f'w-{render_length}')#TODO This length is bad for character name
         elif entry_type == "character_name" and not head_table:
             pass
         elif entry_type == "int":
@@ -315,21 +326,21 @@ def entry_fields(mem_section, header_list, index=0):
                 ui.number(label=label, value=data_value, on_change=lambda e, h=header:
                 set_character_data(mem_section, index, h, e.value, "int"))
         elif entry_type == "string":
-            if length_calc(data_value) > label_length:
-                label_length = length_calc(data_value)
+            if length_calc(data_value) > render_length:
+                render_length = length_calc(data_value)
             if head_table:
                 ui.input(label=label, value=data_value, on_change=lambda e, h=header:
-                set_character_detail(h, e.value, "string")).classes(f'w-{label_length}')
+                set_character_detail(h, e.value, "string")).classes(f'w-{render_length}')
             else:
                 ui.input(label=label, value=data_value, on_change=lambda e, h=header:
-                set_character_data(mem_section, index, h, e.value, "string")).classes(f'w-{label_length}')
+                set_character_data(mem_section, index, h, e.value, "string")).classes(f'w-{render_length}')
         elif entry_type == "dice_equation":  # Same as String but with validation. #TODO add validation (Try/Except on dice roll?)
             if head_table:
                 ui.input(label=label, value=data_value, on_change=lambda e, h=header:
-                set_character_detail(h, e.value)).classes(f'w-{label_length}')
+                set_character_detail(h, e.value)).classes(f'w-{render_length}')
             else:
                 ui.input(label=label, value=data_value, on_change=lambda e, h=header:
-                set_character_data(mem_section, index, h, e.value)).classes(f'w-{label_length}')
+                set_character_data(mem_section, index, h, e.value)).classes(f'w-{render_length}')
         elif entry_type == "bool":
             if head_table:
                 ui.checkbox(text=label, value=data_value, on_change=lambda e, h=header:
@@ -341,19 +352,19 @@ def entry_fields(mem_section, header_list, index=0):
             if head_table:
                 ui.select(options=[resource["name"] for resource in selected_character["resources"]],
                           label=label, value=data_value,
-                          on_change=lambda e: set_character_detail(header, e.value)).classes(f'w-{label_length}')
+                          on_change=lambda e: set_character_detail(header, e.value)).classes(f'w-{render_length}')
             else:
                 ui.select(options=[resource["name"] for resource in selected_character["resources"]],
                           label=label, value=data_value,
-                          on_change=lambda e, h=header: set_character_data(mem_section, index, h, e.value)).classes(f'w-{label_length}')
+                          on_change=lambda e, h=header: set_character_data(mem_section, index, h, e.value)).classes(f'w-{render_length}')
         else:
             if head_table:
                 ui.select(options=mem["lists"][entry_type], label=label, value=data_value,
-                          on_change=lambda e: set_character_detail(header, e.value)).classes(f'w-{label_length}')
+                          on_change=lambda e: set_character_detail(header, e.value)).classes(f'w-{render_length}')
             else:
                 ui.select(options=mem["lists"][entry_type], label=label,
                           value=data_value,
-                          on_change=lambda e, h=header: set_character_data(mem_section, index, h, e.value)).classes(f'w-{label_length}')
+                          on_change=lambda e, h=header: set_character_data(mem_section, index, h, e.value)).classes(f'w-{render_length}')
 
 
 def search_field(mem_section, datablock, search_column, description_column, index):
